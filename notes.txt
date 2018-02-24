@@ -1,0 +1,3 @@
+https://www.learnentityframeworkcore.com/migrations/commands/cli-commands
+
+cli commands to work with Entity Framework

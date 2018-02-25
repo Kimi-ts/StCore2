@@ -246,3 +246,6 @@ ModelManifest.xml
 /.vscode/
 
 appsettings.Development.json
+certificate.json
+certificate.pfx
+hosting.json

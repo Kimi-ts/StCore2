@@ -1,3 +1,10 @@
 https://www.learnentityframeworkcore.com/migrations/commands/cli-commands
 
 cli commands to work with Entity Framework
+
+remove file from git history if already pushed
+git rm --cached giant_file
+# Stage our giant file for removal, but leave it on disk
+
+instruction to generate certificate
+https://www.humankode.com/asp-net-core/develop-locally-with-https-self-signed-certificates-and-asp-net-core

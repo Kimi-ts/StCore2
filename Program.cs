@@ -50,5 +50,10 @@ namespace Razor_VS_Code_test
 
             host.Run();
         }
+
+        public static IWebHost BuildWebHost(string[] args) =>
+            WebHost.CreateDefaultBuilder(args)
+                .UseStartup<Startup>()
+                .Build();
     }
 }

@@ -223,6 +223,16 @@ namespace Razor_VS_Code_test.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
+                ApplicationRole role = null;
+                if (!string.IsNullOrEmpty(model.PartnerConfirmationCode)){
+                    if (model.PartnerConfirmationCode == "12"){
+                        role = await _roleManager.FindByNameAsync("ShopOwner");
+                    }
+                }
+                else{
+                    role = await _roleManager.FindByNameAsync("Client");
+                }
+
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -232,6 +242,14 @@ namespace Razor_VS_Code_test.Controllers
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
                     await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
+
+                    if (role != null){
+                        IdentityResult roleResult = await _userManager.AddToRoleAsync(user, role.Name);
+                        if (roleResult.Succeeded)
+                        {
+                            _logger.LogInformation("User addet to role");
+                        }
+                    }
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation("User created a new account with password.");

@@ -65,5 +65,27 @@ namespace Razor_VS_Code_test.Controllers
 
             return View(model);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> PostMessage(AddNewMessageViewModel model)
+        {            
+            if (!ModelState.IsValid){
+                return View(model);
+            }
+
+            Message message = new Message
+            {
+                Date = DateTime.Now,
+                OwnerId = model.AuthorId,
+                AuthorId = model.AuthorId,
+                Text = model.MessageText
+            };
+
+            await _context.Messages.AddAsync(message);
+            await _context.SaveChangesAsync();
+            
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

@@ -20,4 +20,4 @@
         <p>You can enter new message to @Model.Partner.UserName</p>
     </div>
 </div>
-@Html.Partial("_AddNewMessage", new  AddNewMessageViewModel{ MessageText = String.Empty, Author = @Model.CurrentUser, Partner = @Model.Partner})
+@Html.Partial("_AddNewMessage", new  AddNewMessageViewModel{ MessageText = String.Empty, AuthorId = @Model.CurrentUser.Id, PartnerId = @Model.Partner.Id})

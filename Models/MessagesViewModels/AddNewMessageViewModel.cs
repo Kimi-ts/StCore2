@@ -10,7 +10,7 @@ namespace Razor_VS_Code_test.Models.MessagesViewModels
     {
         [Required]
         public string MessageText { get; set; }
-        public ApplicationUser Author { get; set; }
-        public ApplicationUser Partner { get; set; }
+        public string AuthorId { get; set; }
+        public string PartnerId { get; set; }
     }
 }

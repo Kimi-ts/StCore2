@@ -24,6 +24,5 @@ namespace Razor_VS_Code_test.Models.AccountViewModels
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
         public string PartnerConfirmationCode {get; set;}
-        public string ApplicationRoleId {get; set;}
     }
 }

@@ -1,0 +1,17 @@
+@model MessagesListVievModel
+@{
+    ViewData["Title"] = "Your list of messages";
+}
+
+<h4>@ViewData["Title"]</h4>
+<p>Here is the list of your messages, @Model.CurrentUser.UserName</p>
+<div class="row">
+    <div class="col-md-12">
+        <ul>
+            @foreach (var message in Model.Messages)
+            {
+                <li>@message.Text</li>
+            }
+        </ul>
+    </div>
+</div>

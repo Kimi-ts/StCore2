@@ -41,7 +41,7 @@ namespace Razor_VS_Code_test.Controllers
             _logger = logger;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string id)
         {
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
@@ -50,7 +50,7 @@ namespace Razor_VS_Code_test.Controllers
             }
 
             var messages = (from m in _context.Messages
-                            where m.OwnerId == user.Id
+                            where m.OwnerId == id
                             select m).ToList();
             
             var adminsList = await _userManager.GetUsersInRoleAsync("Administrator");
@@ -85,7 +85,7 @@ namespace Razor_VS_Code_test.Controllers
             await _context.Messages.AddAsync(message);
             await _context.SaveChangesAsync();
             
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index), model.ChatOwnerId);
         }
     }
 }

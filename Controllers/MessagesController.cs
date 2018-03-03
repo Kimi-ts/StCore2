@@ -51,16 +51,26 @@ namespace Razor_VS_Code_test.Controllers
 
             var messages = (from m in _context.Messages
                             where m.OwnerId == id
+                            orderby m.Date
                             select m).ToList();
-            
-            var adminsList = await _userManager.GetUsersInRoleAsync("Administrator");
-            var partner = adminsList.First();
 
+            ApplicationUser chatOwner = new ApplicationUser();
+
+            if (await _userManager.IsInRoleAsync(user, "Administrator"))
+            {
+                chatOwner = (from u in _context.Users
+                            where u.Id == id 
+                            select u).First();
+            }
+            else{
+                chatOwner = user;
+            }
+            
             var model = new MessagesListVievModel
             {
                 Messages = messages,
                 CurrentUser = user,
-                Partner = partner
+                ChatOwner = chatOwner
             };
 
             return View(model);
@@ -77,7 +87,7 @@ namespace Razor_VS_Code_test.Controllers
             Message message = new Message
             {
                 Date = DateTime.Now,
-                OwnerId = model.AuthorId,
+                OwnerId = model.ChatOwnerId,
                 AuthorId = model.AuthorId,
                 Text = model.MessageText
             };
@@ -85,7 +95,7 @@ namespace Razor_VS_Code_test.Controllers
             await _context.Messages.AddAsync(message);
             await _context.SaveChangesAsync();
             
-            return RedirectToAction(nameof(Index), model.ChatOwnerId);
+            return RedirectToAction(nameof(Index), new {id = model.ChatOwnerId});
         }
     }
 }

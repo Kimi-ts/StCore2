@@ -97,5 +97,37 @@ namespace Razor_VS_Code_test.Controllers
             
             return RedirectToAction(nameof(Index), new {id = model.ChatOwnerId});
         }
+
+        public async Task<IActionResult> DialogList()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            }
+            var model = new List<MessagesListVievModel>();
+
+            var chatUsers = (from u in _context.Messages
+                            select u.OwnerId).Distinct().ToList();
+
+            foreach(var chatOwner in chatUsers){
+                var messages = (from m in _context.Messages
+                                where m.OwnerId == chatOwner
+                                select m).ToList();
+                var chatUser = (from u in _context.Users
+                                  where u.Id == chatOwner
+                                  select u).First();
+
+                var message = new MessagesListVievModel{
+                    Messages = messages,
+                    CurrentUser = user,
+                    ChatOwner = chatUser
+                };
+
+                model.Add(message);
+            }
+
+            return View(model);
+        }
     }
 }

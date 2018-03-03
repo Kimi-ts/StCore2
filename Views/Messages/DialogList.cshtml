@@ -1,0 +1,19 @@
+@model IList<MessagesListVievModel>
+@{
+    ViewData["Title"] = "Your list of messages";
+}
+
+<h4>@ViewData["Title"]</h4>
+<p>Here is the list of your dialogs:</p>
+<div class="row">
+    <div class="col-md-12">
+        <ul>
+            @foreach (var messageList in Model)
+            {
+                <li>
+                    <a asp-area="" asp-controller="Messages" asp-action="Index" asp-route-id="@messageList.ChatOwner.Id" title="@messageList.ChatOwner.UserName">@messageList.ChatOwner.UserName</a>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

@@ -13,7 +13,7 @@
                 @if (await UserManager.IsInRoleAsync(user, "Administrator"))
                 {
                     <li>
-                        <a asp-area="" asp-controller="Home" asp-action="Index" title="Message">Tutu</a>
+                        <a asp-area="" asp-controller="Messages" asp-action="DialogList" title="Messages">Dialogs</a>
                     </li>
                 }
                 else

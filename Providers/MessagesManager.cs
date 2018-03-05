@@ -25,5 +25,11 @@ namespace Razor_VS_Code_test.Models
             
             return messages;
         }
+
+        public async Task AddMessageAsync(Message message)
+        {
+            await _context.Messages.AddAsync(message);
+            await _context.SaveChangesAsync();
+        }
     }
 }

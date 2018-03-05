@@ -92,8 +92,7 @@ namespace Razor_VS_Code_test.Controllers
                 Text = model.MessageText
             };
 
-            await _context.Messages.AddAsync(message);
-            await _context.SaveChangesAsync();
+            await _messageManager.AddMessageAsync(message);
             
             return RedirectToAction(nameof(Index), new {id = model.ChatOwnerId});
         }

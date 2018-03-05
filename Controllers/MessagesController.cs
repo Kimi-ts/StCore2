@@ -25,6 +25,7 @@ namespace Razor_VS_Code_test.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IMessageManager _messageManager;
         private readonly ILogger _logger;
 
         public MessagesController(
@@ -32,12 +33,14 @@ namespace Razor_VS_Code_test.Controllers
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             RoleManager<ApplicationRole> roleManager,
+            IMessageManager messageManager,
             ILogger<MessagesController> logger)
         {
             _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
+            _messageManager = messageManager;
             _logger = logger;
         }
 
@@ -49,10 +52,7 @@ namespace Razor_VS_Code_test.Controllers
                 throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            var messages = (from m in _context.Messages
-                            where m.OwnerId == id
-                            orderby m.Date
-                            select m).ToList();
+            var messages = _messageManager.GetMessagesByUserId(id);
 
             ApplicationUser chatOwner = new ApplicationUser();
 

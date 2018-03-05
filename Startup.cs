@@ -33,6 +33,8 @@ namespace Razor_VS_Code_test
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.AddScoped<IMessageManager, MessageManager>();
+
             services.AddAuthentication().AddGoogle(googleOptions =>
             {
                 googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];

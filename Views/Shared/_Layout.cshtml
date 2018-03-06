@@ -2,17 +2,19 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
     <title>@ViewData["Title"] - Razor_VS_Code_test</title>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+        <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
 </head>
@@ -41,10 +43,44 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
+        <!-- <footer>
             <p>&copy; 2018 - Razor_VS_Code_test</p>
-        </footer>
+        </footer> -->
+
     </div>
+        <section id="footer" class="bg-dark">
+            <div class="container">
+                <div class="row fill-40-viewport py-5 text-white-70 align-items-top">
+                    <div class="col-12 col-md-6">
+                        <ul class="list-unstyled">
+                            <li><h6 class="text-white">MDM-Group</h6></li>
+                            <li>УНН 3353 3534534</li>
+                            <li>ИП Бобок М.Д. лицензия от 01.05.2018</li>
+                        </ul>
+                    </div>
+                    <div class="col-12 col-md-2">
+                        <ul class="list-unstyled">
+                            <li class="text-white"><i class="fa fa-vk" aria-hidden="true"></i> <i class="fa fa-twitter" aria-hidden="true"></i> <i class="fa fa-facebook" aria-hidden="true"></i></li>
+                        </ul>
+                    </div>
+                    <div class="col-12 col-md-2">
+                        <ul class="list-unstyled">
+                            <li><h6 class="text-white">Клиентам</h6></li>
+                            <li>+375 44 7347834</li>
+                            <li>+375 29 7998353</li>
+                            <li>ежедневно с 09 до 18</li>
+                        </ul>
+                    </div>
+                    <div class="col-12 col-md-2">
+                        <ul class="list-unstyled">
+                            <li><h6 class="text-white">Партнёрам</h6></li>
+                            <li>+375 44 7293437</li>
+                            <li>info@mdm-group.by</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery-3.3.1.slim.js"></script>

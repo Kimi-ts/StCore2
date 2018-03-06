@@ -33,3 +33,15 @@
         display: none;
     }
 }
+
+.step-icon i{
+	font-size: 72px;
+}
+
+.text-white-70{
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.text-black-40{
+    color: rgba(0,0,0,0.4);
+}

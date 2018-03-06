@@ -7,7 +7,7 @@ using Razor_VS_Code_test.Data;
 
 namespace Razor_VS_Code_test.Models
 {
-    public class MessageManager: IMessageManager
+    public class MessageManager : IMessageManager
     {
         private ApplicationDbContext _context;
 
@@ -16,13 +16,13 @@ namespace Razor_VS_Code_test.Models
             _context = context;
         }
 
-        public  IList<Message> GetMessagesByUserId(string userId)
+        public IList<Message> GetMessagesByUserId(string userId)
         {
             var messages = (from m in _context.Messages
                             where m.OwnerId == userId
                             orderby m.Date
                             select m).ToList();
-            
+
             return messages;
         }
 
@@ -30,6 +30,13 @@ namespace Razor_VS_Code_test.Models
         {
             await _context.Messages.AddAsync(message);
             await _context.SaveChangesAsync();
+        }
+
+        public IList<string> GetMessageOwnersList()
+        {
+            var chatUsers = (from u in _context.Messages
+                             select u.OwnerId).Distinct().ToList();
+            return chatUsers;
         }
     }
 }

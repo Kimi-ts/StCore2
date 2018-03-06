@@ -10,7 +10,7 @@ namespace Razor_VS_Code_test.Models
     public interface IMessageManager
     {
         IList<Message> GetMessagesByUserId(string userId);
-
         Task AddMessageAsync(Message message);
+        IList<string> GetMessageOwnersList();
     }
 }

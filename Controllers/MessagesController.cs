@@ -21,7 +21,6 @@ namespace Razor_VS_Code_test.Controllers
     [Authorize]
     public class MessagesController : Controller
     {
-        private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
@@ -29,14 +28,12 @@ namespace Razor_VS_Code_test.Controllers
         private readonly ILogger _logger;
 
         public MessagesController(
-            ApplicationDbContext context,
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             RoleManager<ApplicationRole> roleManager,
             IMessageManager messageManager,
             ILogger<MessagesController> logger)
         {
-            _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
@@ -54,18 +51,17 @@ namespace Razor_VS_Code_test.Controllers
 
             var messages = _messageManager.GetMessagesByUserId(id);
 
-            ApplicationUser chatOwner = new ApplicationUser();
+            ApplicationUser chatOwner;
 
             if (await _userManager.IsInRoleAsync(user, "Administrator"))
             {
-                chatOwner = (from u in _context.Users
-                            where u.Id == id 
-                            select u).First();
+                chatOwner = await _userManager.FindByIdAsync(id);
             }
-            else{
+            else
+            {
                 chatOwner = user;
             }
-            
+
             var model = new MessagesListVievModel
             {
                 Messages = messages,
@@ -79,8 +75,9 @@ namespace Razor_VS_Code_test.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> PostMessage(AddNewMessageViewModel model)
-        {            
-            if (!ModelState.IsValid){
+        {
+            if (!ModelState.IsValid)
+            {
                 return View(model);
             }
 
@@ -93,8 +90,8 @@ namespace Razor_VS_Code_test.Controllers
             };
 
             await _messageManager.AddMessageAsync(message);
-            
-            return RedirectToAction(nameof(Index), new {id = model.ChatOwnerId});
+
+            return RedirectToAction(nameof(Index), new { id = model.ChatOwnerId });
         }
 
         public async Task<IActionResult> DialogList()
@@ -106,18 +103,16 @@ namespace Razor_VS_Code_test.Controllers
             }
             var model = new List<MessagesListVievModel>();
 
-            var chatUsers = (from u in _context.Messages
-                            select u.OwnerId).Distinct().ToList();
+            var chatUsers = _messageManager.GetMessageOwnersList();
 
-            foreach(var chatOwner in chatUsers){
-                var messages = (from m in _context.Messages
-                                where m.OwnerId == chatOwner
-                                select m).ToList();
-                var chatUser = (from u in _context.Users
-                                  where u.Id == chatOwner
-                                  select u).First();
+            foreach (var chatOwner in chatUsers)
+            {
+                var messages = _messageManager.GetMessagesByUserId(chatOwner);
 
-                var message = new MessagesListVievModel{
+                var chatUser = await _userManager.FindByIdAsync(chatOwner);
+
+                var message = new MessagesListVievModel
+                {
                     Messages = messages,
                     CurrentUser = user,
                     ChatOwner = chatUser

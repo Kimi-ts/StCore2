@@ -28,13 +28,13 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        <a class="nav-link text-white-70" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="About">About</a>
+                        <a class="nav-link text-white-70" asp-area="" asp-controller="Home" asp-action="About">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
+                        <a class="nav-link text-white-70" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
                     </li>
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
@@ -43,12 +43,8 @@
     </nav>
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <!-- <footer>
-            <p>&copy; 2018 - Razor_VS_Code_test</p>
-        </footer> -->
     </div>
-        <section id="footer" class="bg-dark">
+        <section id="footer" class="bg-inverse">
             <div class="container">
                 <div class="row fill-40-viewport py-5 text-white-70 align-items-top">
                     <div class="col-12 col-md-6">

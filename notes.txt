@@ -8,3 +8,6 @@ git rm --cached giant_file
 
 instruction to generate certificate
 https://www.humankode.com/asp-net-core/develop-locally-with-https-self-signed-certificates-and-asp-net-core
+
+using ef many-to-many relationships:
+https://blog.oneunicorn.com/2017/09/25/many-to-many-relationships-in-ef-core-2-0-part-1-the-basics/

@@ -18,6 +18,7 @@ namespace Razor_VS_Code_test.Models
         public string ShortDescription { get; set; }
         public bool IsActive { get; set; }
         public string ImgUrl { get; set; }
+        public ICollection<SaleTag> SaleTags { get; } = new List<SaleTag>();
         public ApplicationUser Owner { get; set; }
     }
 }

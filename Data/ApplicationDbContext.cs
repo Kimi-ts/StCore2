@@ -25,5 +25,6 @@ namespace Razor_VS_Code_test.Data
 
         //public DbSet<ApplicationUser> ApplicationUser { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<Sale> Sales { get; set; }
     }
 }

@@ -22,9 +22,9 @@ namespace Razor_VS_Code_test.Controllers
             return View();
         }
 
-        public IActionResult Contact()
+        public IActionResult Discount()
         {
-            ViewData["Message"] = "Your contact page.";
+            ViewData["Message"] = "Акции и скидки от наших партнёров";
 
             return View();
         }

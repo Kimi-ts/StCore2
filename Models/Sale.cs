@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
@@ -18,7 +19,10 @@ namespace Razor_VS_Code_test.Models
         public string ShortDescription { get; set; }
         public bool IsActive { get; set; }
         public string ImgUrl { get; set; }
-        public ICollection<SaleTag> SaleTags { get; } = new List<SaleTag>();
+        private ICollection<SaleTag> SaleTags { get; } = new List<SaleTag>();
+
+        [NotMapped]
+        public IEnumerable<Tag> Tags  => SaleTags.Select(e => e.Tag);
         public ApplicationUser Owner { get; set; }
     }
 }

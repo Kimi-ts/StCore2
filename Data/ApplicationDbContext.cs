@@ -21,6 +21,14 @@ namespace Razor_VS_Code_test.Data
 
             builder.Entity<SaleTag>()
                     .HasKey(t => new { t.TagId, t.SaleId });
+
+            builder.Entity<SaleTag>()
+                    .HasOne(st => st.Sale)
+                    .WithMany("SaleTags");
+
+            builder.Entity<SaleTag>()
+                    .HasOne(ts => ts.Tag)
+                    .WithMany("SaleTags");
         }
         public DbSet<Message> Messages { get; set; }
         public DbSet<Sale> Sales { get; set; }

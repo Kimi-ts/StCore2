@@ -1,19 +1,33 @@
-﻿ @{ ViewData["Title"] = "Акции и скидки наших партнёров"; }
+﻿ @model DiscountsListViewModel
+ 
+ @{ ViewData["Title"] = "Акции и скидки наших партнёров"; }
 <h3>@ViewData["Message"]</h3>
 
-<p>Use this area to provide additional information.</p>
+<p>Скидок и акций не найдено. Попробуйте изменить параметры фильтра.</p>
 <div class="row">
   <div class="col-8">
     <div class="row">
-      <div class="col-6 mb-3">
+      @foreach (var sale in Model.Sales)
+      {
+        <div class="col-6 mb-3">
+        <div class="card-img bg-faded"></div>
+        <div class="card-block">
+          <h6 class="card-subtitle">@sale.Title</h6>
+          <hr>
+          <a href="#">Подробнее</a>
+        </div>
+      </div>
+      }
+
+      <!-- <div class="col-6 mb-3">
         <div class="card-img bg-faded"></div>
         <div class="card-block">
           <h6 class="card-subtitle">Скидки на комплексное обслуживание авто</h6>
           <hr>
           <a href="#">Подробнее</a>
         </div>
-      </div>
-      <div class="col-6 mb-3">
+      </div> -->
+      <!-- <div class="col-6 mb-3">
         <div class="card-img bg-faded"></div>
         <div class="card-block">
           <h6 class="card-subtitle">Скидка предъявителям клубных карт увеличена на 14%</h6>
@@ -23,22 +37,33 @@
           <hr>
           <a href="#">Подробнее</a>
         </div>
-      </div>
-      <div class="col-6 mb-3">
+      </div> -->
+      <!-- <div class="col-6 mb-3">
         <div class="card-img bg-faded"></div>
         <div class="card-block">
           <h6 class="card-subtitle">Скидка на ремонт Pegeot</h6>
           <hr>
           <a href="#">Подробнее</a>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
   <div class="col-4">
+    <form>
     Фильтры
     <hr>
     <label>
       <input type="checkbox"> Новые акции
     </label>
+    <hr>
+    Марка авто
+    <label>
+      <input type="checkbox">Pegeot
+    </label>
+    <label>
+      <input type="checkbox">Reneult
+    </label>
+    <input type="submit" value="Применить">
+    </form>
   </div>
 </div>

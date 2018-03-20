@@ -34,6 +34,7 @@ namespace Razor_VS_Code_test
                 .AddDefaultTokenProviders();
 
             services.AddScoped<IMessageManager, MessageManager>();
+            services.AddScoped<IDiscountManager, DiscountManager>();
 
             services.AddAuthentication().AddGoogle(googleOptions =>
             {

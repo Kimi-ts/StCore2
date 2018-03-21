@@ -34,5 +34,11 @@
         <button type="submit">Применить</button>
       </fieldset>
     </form>
+    <div>
+        @foreach(var tag in Model.Tags)
+        {
+          <a class="" asp-area="" asp-controller="Discount" asp-action="Index" asp-route-count="16" asp-route-isDisplayNew="@Model.IsDisplayNew" asp-route-tags="@tag.Title">@tag.Title (@tag.Sales.Count())</a>
+        }
+    </div>
   </div>
 </div>

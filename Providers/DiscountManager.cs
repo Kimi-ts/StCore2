@@ -19,9 +19,9 @@ namespace Razor_VS_Code_test.Models
 
         public IList<Tag> GetAllTags()
         {
-            var tags = (from t in _context.Tags
-                        orderby t.Category
-                        select t).ToList();
+            var tags = _context.Tags
+                        .Include("SaleTags.Sale")
+                        .ToList();
             return tags;
         }
 

@@ -3,10 +3,13 @@
  @{ ViewData["Title"] = "Акции и скидки наших партнёров"; }
 <h3>@ViewData["Message"]</h3>
 
-<p>Скидок и акций не найдено. Попробуйте изменить параметры фильтра.</p>
 <div class="row">
   <div class="col-8">
     <div class="row">
+      @if (Model.Sales.Count == 0)
+      {
+        <p>Скидок и акций не найдено. Попробуйте изменить параметры фильтра.</p>
+      }
       @foreach (var sale in Model.Sales)
       {
       <div class="col-6 mb-3">
@@ -28,17 +31,24 @@
         <hr>
         <div class="checkbox">
           <input asp-for="@Model.IsDisplayNew" />
-          <label asp-for="@Model.IsDisplayNew"></label>
+          <label asp-for="@Model.IsDisplayNew">Только новые</label>
         </div>
         <input type="hidden" value="all" asp-for="@Model.Tags" />
         <button type="submit">Применить</button>
       </fieldset>
     </form>
     <div>
-        @foreach(var tag in Model.Tags)
+      @foreach(var category in Model.Categories)
+      {
+        <h6>@category</h6>
+        foreach(var tag in Model.Tags)
         {
-          <a class="" asp-area="" asp-controller="Discount" asp-action="Index" asp-route-count="16" asp-route-isDisplayNew="@Model.IsDisplayNew" asp-route-tags="@tag.Title">@tag.Title (@tag.Sales.Count())</a>
+          if (tag.Category == category)
+          {
+            <p><a class="" asp-area="" asp-controller="Discount" asp-action="Index" asp-route-count="16" asp-route-isDisplayNew="@Model.IsDisplayNew" asp-route-tags="@tag.Title">@tag.Title (@tag.Sales.Count())</a></p>
+          }
         }
+      }
     </div>
   </div>
 </div>

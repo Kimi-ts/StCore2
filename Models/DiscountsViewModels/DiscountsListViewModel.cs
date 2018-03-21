@@ -11,5 +11,6 @@ namespace Razor_VS_Code_test.Models.MessagesViewModels
         public IList<Sale> Sales { get; set; }
         public bool IsDisplayNew { get; set; }
         public IList<Tag> Tags { get; set; }
+        public IList<string> Categories { get; set; }
     }
 }

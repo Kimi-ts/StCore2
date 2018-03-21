@@ -33,6 +33,7 @@ namespace Razor_VS_Code_test.Controllers
             var model = new DiscountsListViewModel();
             model.Sales = _discountManager.GetSales(count, start, tagsList);
             model.Tags = _discountManager.GetAllTags();
+            model.Categories = _discountManager.GetAllTagsCategories();
             model.IsDisplayNew = isDisplayNew;
             return View(model);
         }

@@ -9,7 +9,7 @@ namespace Razor_VS_Code_test.Models
 {
     public interface IDiscountManager
     {
-        IList<Sale> GetSales(int maxCount,DateTime dateFrom, DateTime dateUntil, IList<string> tags);
+        IList<Sale> GetSales(int maxCount, DateTime dateFrom, IList<string> tags);
         IList<Tag> GetAllTags();
     }
 }

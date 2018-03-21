@@ -18,14 +18,20 @@ namespace Razor_VS_Code_test.Controllers
             _discountManager = discountManager;
         }
 
-        public IActionResult Index(int count, DateTime start, DateTime finish, string tags)
+        public IActionResult Index(int count, bool isDisplayNew, string tags)
         {
             List<string> tagsList = new List<string>();
             if (tags != "all"){
                 tagsList = tags.Split(',').ToList();
             }
+
+            DateTime start = DateTime.Now.AddYears(-1);
+            if (isDisplayNew == true)
+            {
+                start = DateTime.Now.AddDays(-7);
+            }
             var model = new DiscountsListViewModel();
-            model.Sales = _discountManager.GetSales(count, start, finish, tagsList);
+            model.Sales = _discountManager.GetSales(count, start, tagsList);
             return View(model);
         }
     }

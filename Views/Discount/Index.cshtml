@@ -9,61 +9,30 @@
     <div class="row">
       @foreach (var sale in Model.Sales)
       {
-        <div class="col-6 mb-3">
+      <div class="col-6 mb-3">
         <div class="card-img bg-faded"></div>
         <div class="card-block">
           <h6 class="card-subtitle">@sale.Title</h6>
+          <p class="text-muted">@sale.Description</p>
           <hr>
           <a href="#">Подробнее</a>
         </div>
       </div>
       }
-
-      <!-- <div class="col-6 mb-3">
-        <div class="card-img bg-faded"></div>
-        <div class="card-block">
-          <h6 class="card-subtitle">Скидки на комплексное обслуживание авто</h6>
-          <hr>
-          <a href="#">Подробнее</a>
-        </div>
-      </div> -->
-      <!-- <div class="col-6 mb-3">
-        <div class="card-img bg-faded"></div>
-        <div class="card-block">
-          <h6 class="card-subtitle">Скидка предъявителям клубных карт увеличена на 14%</h6>
-          <p class="text-muted">
-            С 15 по 20 августа всем обладателям клубной карты "Авто-Эксперт" начисляется дополнительная скидка на услуги по ремонту авто старше 3 лет. Предварительная бронь не обязательна.
-          </p>
-          <hr>
-          <a href="#">Подробнее</a>
-        </div>
-      </div> -->
-      <!-- <div class="col-6 mb-3">
-        <div class="card-img bg-faded"></div>
-        <div class="card-block">
-          <h6 class="card-subtitle">Скидка на ремонт Pegeot</h6>
-          <hr>
-          <a href="#">Подробнее</a>
-        </div>
-      </div> -->
     </div>
   </div>
   <div class="col-4">
-    <form>
-    Фильтры
-    <hr>
-    <label>
-      <input type="checkbox"> Новые акции
-    </label>
-    <hr>
-    Марка авто
-    <label>
-      <input type="checkbox">Pegeot
-    </label>
-    <label>
-      <input type="checkbox">Reneult
-    </label>
-    <input type="submit" value="Применить">
+    <form asp-action="Index" asp-controller="Discount" method="GET">
+      <fieldset class="form-group">
+        <h3>Фильтры</h3>
+        <hr>
+        <div class="checkbox">
+          <input asp-for="@Model.IsDisplayNew" />
+          <label asp-for="@Model.IsDisplayNew"></label>
+        </div>
+        <input type="hidden" value="all" asp-for="@Model.Tags" />
+        <button type="submit">Применить</button>
+      </fieldset>
     </form>
   </div>
 </div>

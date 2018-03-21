@@ -25,13 +25,13 @@ namespace Razor_VS_Code_test.Models
             return tags;
         }
 
-        public IList<Sale> GetSales(int maxCount, DateTime dateFrom, DateTime dateUntil, IList<string> tags)
+        public IList<Sale> GetSales(int maxCount, DateTime dateFrom, IList<string> tags)
         {
             var sales = _context.Sales
                         .Include("SaleTags.Tag")
                         .Where(sale => sale.IsActive == true
                                && sale.CreatedDate >= dateFrom
-                               && sale.ExpireDate < dateUntil)
+                               && sale.ExpireDate >= DateTime.Now)
                         .ToList();
 
             //can't use "Include" inside linq expression itself, so call in in separate expression

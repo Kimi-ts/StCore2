@@ -1,10 +1,5 @@
 @{ Layout = "/Views/Shared/_Layout.cshtml"; }
 
-<h2>Акции и скидки от наших партнёров</h2>
-
-<div class="row">
-    <div class="col-md-12">
-        @RenderBody()
-    </div>
-</div>
+<h2 class="mt-3">Акции и скидки от наших партнёров</h2>
+@RenderBody()
 @section Scripts { @RenderSection("Scripts", required: false) }

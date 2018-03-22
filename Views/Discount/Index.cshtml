@@ -1,14 +1,15 @@
 ﻿ @model DiscountsListViewModel
  
  @{ ViewData["Title"] = "Акции и скидки наших партнёров"; }
-<h3>@ViewData["Message"]</h3>
-
+<p class="text-muted">Подробности акций вы можете уточнить по телефону</p>
 <div class="row">
-  <div class="col-8">
+  <div class="col-9">
     <div class="row">
       @if (Model.Sales.Count == 0)
       {
-        <p>Скидок и акций не найдено. Попробуйте изменить параметры фильтра.</p>
+        <div class="col-12">
+          <p class="lead">Скидок и акций не найдено. Попробуйте изменить параметры фильтра.</p>
+        </div>
       }
       @foreach (var sale in Model.Sales)
       {
@@ -24,30 +25,33 @@
       }
     </div>
   </div>
-  <div class="col-4">
+  <div class="col-3">
     <form asp-action="Index" asp-controller="Discount" method="GET">
       <fieldset class="form-group">
-        <h3>Фильтры</h3>
+        <h5>Фильтры</h5>
         <hr>
         <div class="checkbox">
           <input asp-for="@Model.IsDisplayNew" />
           <label asp-for="@Model.IsDisplayNew">Только новые</label>
         </div>
         <input type="hidden" value="all" asp-for="@Model.Tags" />
-        <button type="submit">Применить</button>
+        <button type="submit" class="btn btn-secondary btn-sm">Применить</button>
       </fieldset>
     </form>
-    <div>
+    <div class="pt-1">
       @foreach(var category in Model.Categories)
       {
         <h6>@category</h6>
-        foreach(var tag in Model.Tags)
+        <ul class="list-unstyled">
+        @foreach(var tag in Model.Tags)
         {
           if (tag.Category == category)
           {
-            <p><a class="" asp-area="" asp-controller="Discount" asp-action="Index" asp-route-count="16" asp-route-isDisplayNew="@Model.IsDisplayNew" asp-route-tags="@tag.Title">@tag.Title (@tag.Sales.Count())</a></p>
+            <li><a class="" asp-area="" asp-controller="Discount" asp-action="Index" asp-route-count="16" asp-route-isDisplayNew="@Model.IsDisplayNew" asp-route-tags="@tag.Title">@tag.Title (@tag.Sales.Count())</a></li>
           }
         }
+        </ul>
+
       }
     </div>
   </div>

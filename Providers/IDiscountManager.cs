@@ -11,6 +11,5 @@ namespace Razor_VS_Code_test.Models
     {
         IList<Sale> GetSales(int maxCount, DateTime dateFrom, IList<string> tags);
         IList<Tag> GetAllTags();
-        IList<string> GetAllTagsCategories();
     }
 }

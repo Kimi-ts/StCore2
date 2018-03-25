@@ -25,15 +25,6 @@ namespace Razor_VS_Code_test.Models
             return tags;
         }
 
-        public IList<string> GetAllTagsCategories()
-        {
-            var categories = (from t in _context.Tags
-                                select t.Category)
-                                .Distinct()
-                                .ToList();
-            return categories;
-        }
-
         public IList<Sale> GetSales(int maxCount, DateTime dateFrom, IList<string> tags)
         {
             var sales = _context.Sales

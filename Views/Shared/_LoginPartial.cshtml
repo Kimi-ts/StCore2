@@ -11,6 +11,9 @@
                 @if (await UserManager.IsInRoleAsync(user, "Administrator"))
                 {
                     <li class="nav-item">
+                        <a class="nav-link text-white-70" asp-area="" asp-controller="Settings" asp-action="Index" title="Управление">Управление</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link text-white-70" asp-area="" asp-controller="Messages" asp-action="DialogList" title="Messages">Dialogs</a>
                     </li>
                 }

@@ -8,8 +8,9 @@ namespace Razor_VS_Code_test.Models.AccountViewModels
 {
     public class ForgotPasswordViewModel
     {
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage ="Поле Email обязательное")]
+        [EmailAddress(ErrorMessage = "Пожалуйста, введите корректный email-адрес")]
+        [Display(Name = "Email")]
         public string Email { get; set; }
     }
 }

@@ -81,7 +81,7 @@ namespace Razor_VS_Code_test.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Пользователь не найден");
                     return View(model);
                 }
             }

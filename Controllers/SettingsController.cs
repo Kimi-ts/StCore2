@@ -15,6 +15,11 @@ namespace Razor_VS_Code_test.Controllers
             return View();
         }
 
+        public IActionResult Discounts()
+        {
+            return View();
+        }
+
         // public IActionResult About()
         // {
         //     ViewData["Message"] = "Your application description page.";

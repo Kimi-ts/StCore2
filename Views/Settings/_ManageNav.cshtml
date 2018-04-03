@@ -1,0 +1,6 @@
+@using Razor_VS_Code_test.Views.Settings
+
+<ul class="nav flex-column">
+    <li class="@ManageNavPages.IndexNavClass(ViewContext)" class="nav-item"><a class="nav-link" asp-action="Index">Главная</a></li>
+    <li class="@ManageNavPages.ManageActionsNavClass(ViewContext)" class="nav-item"><a class="nav-link" asp-action="Discounts">Управление акциями</a></li>
+</ul>

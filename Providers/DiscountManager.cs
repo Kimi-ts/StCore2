@@ -17,6 +17,12 @@ namespace Razor_VS_Code_test.Models
             _context = context;
         }
 
+        public async Task AddTagAsync(Tag tag)
+        {
+            await _context.Tags.AddAsync(tag);
+            await _context.SaveChangesAsync();
+        }
+
         public IList<Tag> GetAllTags()
         {
             var tags = _context.Tags

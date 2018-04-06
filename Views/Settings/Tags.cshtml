@@ -1,6 +1,20 @@
+@model IList<Tag>
 @{
     ViewData["Title"] = "Упраление тэгами";
     ViewData.AddActivePage(ManageNavPages.ManageTags);
 }
 
 <p class="text-muted">@ViewData["Title"]</p>
+
+<p>Список существующих тэгов:</p>
+<ul>
+    @foreach (var tag in Model)
+    {
+        <li>@tag.Category @tag.Title</li>
+    }
+</ul>
+
+@Html.Partial("_AddNewTag", new Tag())
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

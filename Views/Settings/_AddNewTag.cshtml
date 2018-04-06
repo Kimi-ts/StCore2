@@ -1,0 +1,13 @@
+@model Tag
+
+<form asp-controller="Settings" asp-action="PostTag" method="POST">
+    <label asp-for="Category"></label>
+    <input asp-for="Category" >
+    <span asp-validation-for="Category" class="text-danger"></span>
+    <br />
+    <label asp-for="Title"></label>
+    <input asp-for="Title" />
+    <span asp-validation-for="Title" class="text-danger"></span>
+    <br />
+    <input type="submit" value="Отправить" />
+</form>

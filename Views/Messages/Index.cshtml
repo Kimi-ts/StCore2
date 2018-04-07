@@ -1,31 +1,46 @@
 @using Razor_VS_Code_test.Utils;
 
+@inject UserManager<ApplicationUser> UserManager
+
 @model MessagesListVievModel
 @{
-    ViewData["Title"] = "Ваши последние сообщения";
+    ViewData["Title"] = "Ваша последняя переписка с " + Model.ChatOwner.UserName;
 }
 @{
-    var titleLetter = Consts.IconPlaceholderUrl + Model.CurrentUser.UserName[0];
+    //var titleLetter = Consts.IconPlaceholderUrl + Model.CurrentUser.UserName[0];
 }
 <p class="text-muted">@ViewData["Title"]</p>
 <hr />
 
 <div class="row">
-    <div class="col-md-12">
-        <ul>
+    <div class="col-md-6">
+        <ul class="list-group">
             @foreach (var message in Model.Messages)
             {
-                <li>
-                    <span><img src="@titleLetter" alt="User Avatar" class="rounded-circle" /></span>
+                <li class="list-group-item mb-3">
+                    <div class="d-flex flex-row w-100">
+                        @{
+                            var titleLetter = Consts.IconPrimaryPlaceholderUrl + char.ToUpper(message.Author.UserName[0]);
+                            var titleUserName = message.Author.UserName;
+
+                            if (await UserManager.IsInRoleAsync(message.Author, "Administrator"))
+                            {
+                                titleLetter = Consts.IconSuccessPlaceholderUrl + "A";
+                                titleUserName = "Администратор";
+                            }
+                        }
+                        <div class="pr-3"><img src="@titleLetter" alt="User Avatar" class="rounded-circle" /></div>
+                        <div class="row w-100">
+                            <div class="d-flex justify-content-between col-12">
+                                <div class="font-weight-bold">@titleUserName</div>
+                                <div class="text-right text-muted small">@message.Date.ToString("MM/dd/yy H:mm:s")</div>
+                            </div>
+                            <div class="col-12">@message.Text</div>
+                        </div>
+                    </div>
                 </li>
-                // <li>@message.Text</li>
             }
         </ul>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-12">
-        <p>You can enter new message to @Model.ChatOwner.UserName</p>
     </div>
 </div>
 @Html.Partial("_AddNewMessage", new  AddNewMessageViewModel{ MessageText = String.Empty, AuthorId = @Model.CurrentUser.Id, ChatOwnerId = @Model.ChatOwner.Id})

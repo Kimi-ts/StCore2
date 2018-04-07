@@ -1,16 +1,24 @@
+@using Razor_VS_Code_test.Utils;
+
 @model MessagesListVievModel
 @{
-    ViewData["Title"] = "Your list of messages";
+    ViewData["Title"] = "Ваши последние сообщения";
 }
+@{
+    var titleLetter = Consts.IconPlaceholderUrl + Model.CurrentUser.UserName[0];
+}
+<p class="text-muted">@ViewData["Title"]</p>
+<hr />
 
-<h4>@ViewData["Title"]</h4>
-<p>Here is the list of your messages, @Model.CurrentUser.UserName</p>
 <div class="row">
     <div class="col-md-12">
         <ul>
             @foreach (var message in Model.Messages)
             {
-                <li>@message.Text</li>
+                <li>
+                    <span><img src="@titleLetter" alt="User Avatar" class="rounded-circle" /></span>
+                </li>
+                // <li>@message.Text</li>
             }
         </ul>
     </div>

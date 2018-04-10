@@ -1,14 +1,14 @@
 @model AddNewTagViewModel
 
-    @foreach (var category in Model.AllCategories)
-    {
-        <li>@category</li>
-    }
-
 <form asp-controller="Settings" asp-action="PostTag" method="POST">
-    <label asp-for="@Model.Tag.Category"></label>
-    <input asp-for="@Model.Tag.Category" >
-    <span asp-validation-for="@Model.Tag.Category" class="text-danger"></span>
+    @{
+        for(int i = 0; i < Model.AllCategories.Count(); i++)
+        {
+            <input asp-for="@Model.Tag.Category" value="@Model.AllCategories[i]" type="radio" />
+            <label asp-for="@Model.AllCategories[i]">@Model.AllCategories[i]</label>
+            <input asp-for="@Model.AllCategories[i]" type="hidden" />
+        }
+    }
     <br />
     <label asp-for="@Model.Tag.Title"></label>
     <input asp-for="@Model.Tag.Title" />

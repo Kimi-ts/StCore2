@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Razor_VS_Code_test.Models;
+using Razor_VS_Code_test.Models.TagsViewModels;
 
 namespace Razor_VS_Code_test.Controllers
 {
@@ -35,14 +36,14 @@ namespace Razor_VS_Code_test.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> PostTag(Tag model)
+        public async Task<IActionResult> PostTag(AddNewTagViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            await _discountManager.AddTagAsync(model);
+            await _discountManager.AddTagAsync(model.Tag);
 
             return RedirectToAction(nameof(Tags));
         }

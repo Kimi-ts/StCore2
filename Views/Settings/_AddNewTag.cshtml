@@ -1,13 +1,18 @@
-@model Tag
+@model AddNewTagViewModel
+
+    @foreach (var category in Model.AllCategories)
+    {
+        <li>@category</li>
+    }
 
 <form asp-controller="Settings" asp-action="PostTag" method="POST">
-    <label asp-for="Category"></label>
-    <input asp-for="Category" >
-    <span asp-validation-for="Category" class="text-danger"></span>
+    <label asp-for="@Model.Tag.Category"></label>
+    <input asp-for="@Model.Tag.Category" >
+    <span asp-validation-for="@Model.Tag.Category" class="text-danger"></span>
     <br />
-    <label asp-for="Title"></label>
-    <input asp-for="Title" />
-    <span asp-validation-for="Title" class="text-danger"></span>
+    <label asp-for="@Model.Tag.Title"></label>
+    <input asp-for="@Model.Tag.Title" />
+    <span asp-validation-for="@Model.Tag.Title" class="text-danger"></span>
     <br />
     <input type="submit" value="Отправить" />
 </form>

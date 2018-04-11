@@ -1,14 +1,18 @@
 @model AddNewTagViewModel
 
-<form asp-controller="Settings" asp-action="PostTag" method="POST">
+<form asp-controller="Settings" asp-action="PostTag" method="POST" id="newTagForm">
     @{
         for(int i = 0; i < Model.AllCategories.Count(); i++)
         {
             <input asp-for="@Model.Tag.Category" value="@Model.AllCategories[i]" type="radio" />
             <label asp-for="@Model.AllCategories[i]">@Model.AllCategories[i]</label>
-            <input asp-for="@Model.AllCategories[i]" type="hidden" />
         }
     }
+    <input v-if="addNew" :value = "newCategory" type="radio" id="Tag_Category" name="Tag.Category" class="input-validation-error">
+    <label v-if="addNew" for="">{{newCategory}}</label>
+    <br />
+    <button v-on:click="addNewCategory">Добавить категорию</button>
+    <input type="text" v-model="newCategory" />
     <br />
     <label asp-for="@Model.Tag.Title"></label>
     <input asp-for="@Model.Tag.Title" />

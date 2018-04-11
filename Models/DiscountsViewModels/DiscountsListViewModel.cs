@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Razor_VS_Code_test.Models.MessagesViewModels
+namespace Razor_VS_Code_test.Models.DiscountsViewModels
 {
     public class DiscountsListViewModel
     {

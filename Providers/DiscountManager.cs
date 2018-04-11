@@ -17,6 +17,12 @@ namespace Razor_VS_Code_test.Models
             _context = context;
         }
 
+        public async Task AddSaleAsync(Sale sale)
+        {
+            await _context.Sales.AddAsync(sale);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task AddTagAsync(Tag tag)
         {
             await _context.Tags.AddAsync(tag);
@@ -31,13 +37,13 @@ namespace Razor_VS_Code_test.Models
             return tags;
         }
 
-        public IList<Sale> GetSales(int maxCount, DateTime dateFrom, IList<string> tags)
+        public IList<Sale> GetSales(int maxCount, DateTime dateFrom, IList<string> tags, bool isIncludeOld)
         {
             var sales = _context.Sales
                         .Include("SaleTags.Tag")
                         .Where(sale => sale.IsActive == true
                                && sale.CreatedDate >= dateFrom
-                               && sale.ExpireDate >= DateTime.Now)
+                               && (isIncludeOld ? true : sale.ExpireDate >= DateTime.Now))
                         .ToList();
 
             //can't use "Include" inside linq expression itself, so call in in separate expression

@@ -9,8 +9,9 @@ namespace Razor_VS_Code_test.Models
 {
     public interface IDiscountManager
     {
-        IList<Sale> GetSales(int maxCount, DateTime dateFrom, IList<string> tags);
+        IList<Sale> GetSales(int maxCount, DateTime dateFrom, IList<string> tags, bool isIncludeOld);
         IList<Tag> GetAllTags();
         Task AddTagAsync(Tag tag);
+        Task AddSaleAsync(Sale sale);
     }
 }

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Razor_VS_Code_test.Models;
-using Razor_VS_Code_test.Models.MessagesViewModels;
+using Razor_VS_Code_test.Models.DiscountsViewModels;
 
 namespace Razor_VS_Code_test.Controllers
 {
@@ -31,7 +31,7 @@ namespace Razor_VS_Code_test.Controllers
                 start = DateTime.Now.AddDays(-7);
             }
             var model = new DiscountsListViewModel();
-            model.Sales = _discountManager.GetSales(count, start, tagsList);
+            model.Sales = _discountManager.GetSales(count, start, tagsList, false);
             model.Tags = _discountManager.GetAllTags();
 
             var categories = model.Tags

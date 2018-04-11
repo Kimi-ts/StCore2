@@ -1,6 +1,29 @@
+@model IList<Sale>
 @{
     ViewData["Title"] = "Упраление акциями";
     ViewData.AddActivePage(ManageNavPages.ManageActions);
 }
 
 <p class="text-muted">@ViewData["Title"]</p>
+
+<p>Список существующих акций:</p>
+<ul>
+    @foreach (var sale in Model)
+    {
+        <li>
+            <div class="mb-3">
+                <div class="card-img bg-faded"></div>
+                <div class="card-block">
+                <h6 class="card-subtitle">@sale.Title</h6>
+                <p class="text-muted">@sale.Description</p>
+                <hr>
+                </div>
+            </div>
+        </li>
+    }
+</ul>
+
+@Html.Partial("_AddNewSale", new AddNewSaleViewModel())
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

@@ -30,7 +30,6 @@ namespace Razor_VS_Code_test.Controllers
         public IActionResult Discounts()
         {
             var discounts = _discountManager.GetSales(20, DateTime.Now.AddYears(-1), new List<string>(), true);
-            Console.WriteLine(discounts.Count());
             return View(discounts);
         }
 

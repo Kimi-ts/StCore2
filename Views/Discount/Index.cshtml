@@ -4,26 +4,7 @@
 <p class="text-muted">Подробности акций вы можете уточнить по телефону</p>
 <div class="row">
   <div class="col-9">
-    <div class="row">
-      @if (Model.Sales.Count == 0)
-      {
-        <div class="col-12">
-          <p class="lead">Скидок и акций не найдено. Попробуйте изменить параметры фильтра.</p>
-        </div>
-      }
-      @foreach (var sale in Model.Sales)
-      {
-      <div class="col-6 mb-3">
-        <div class="card-img bg-faded"></div>
-        <div class="card-block">
-          <h6 class="card-subtitle">@sale.Title</h6>
-          <p class="text-muted">@sale.Description</p>
-          <hr>
-          <a href="#">Подробнее</a>
-        </div>
-      </div>
-      }
-    </div>
+    @Html.Partial("_ActionsList", @Model.Sales)
   </div>
   <div class="col-3">
     <form asp-action="Index" asp-controller="Discount" method="GET">
@@ -51,7 +32,6 @@
           }
         }
         </ul>
-
       }
     </div>
   </div>

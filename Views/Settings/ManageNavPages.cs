@@ -17,12 +17,16 @@ namespace Razor_VS_Code_test.Views.Settings
 
         public static string ManageTags => "ManageTags";
 
+        public static string ManageImages => "ManageImages";
+
 
         public static string IndexNavClass(ViewContext viewContext) => PageNavClass(viewContext, Index);
 
         public static string ManageActionsNavClass(ViewContext viewContext) => PageNavClass(viewContext, ManageActions);
 
         public static string ManagetTagsNavClass(ViewContext viewContext) => PageNavClass(viewContext, ManageTags);
+
+        public static string ManageImagesNavClass(ViewContext viewContext) => PageNavClass(viewContext, ManageImages);
     
         public static string PageNavClass(ViewContext viewContext, string page)
         {

@@ -39,6 +39,12 @@ namespace Razor_VS_Code_test.Controllers
             return View(tags);
         }
 
+        public IActionResult Images()
+        {
+            
+            return View();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> PostTag(AddNewTagViewModel model)

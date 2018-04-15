@@ -20,10 +20,18 @@
         <ul class="list-group">
             @foreach (var messageList in Model)
             {
+                var lastMessage = messageList.Messages.Last();
+                var titleDate = lastMessage.Date.ToString("MM/dd/yy H:mm");
+                if (lastMessage.Date.Date == DateTime.Now.Date)
+                {
+                    titleDate = "сегодня в " + lastMessage.Date.ToString("H:mm");
+                }
+
                 @if (await UserManager.IsInRoleAsync(@messageList.ChatOwner, "Client"))
                 {
-                    <li class="list-group-item list-group-item-success">
+                    <li class="list-group-item list-group-item-success justify-content-between">
                         <a asp-area="" asp-controller="Messages" asp-action="Index" asp-route-id="@messageList.ChatOwner.Id" title="@messageList.ChatOwner.UserName">@messageList.ChatOwner.UserName</a>
+                        <span class="small">@titleDate</span>
                     </li>
                 }
             }
@@ -33,10 +41,18 @@
             <ul class="list-group">
             @foreach (var messageList in Model)
             {
+                var lastMessage = messageList.Messages.Last();
+                var titleDate = lastMessage.Date.ToString("MM/dd/yy H:mm");
+                if (lastMessage.Date.Date == DateTime.Now.Date)
+                {
+                    titleDate = "сегодня в " + lastMessage.Date.ToString("H:mm");
+                }
+
                 @if (await UserManager.IsInRoleAsync(@messageList.ChatOwner, "ShopOwner"))
                 {
-                    <li class="list-group-item list-group-item-warning">
+                    <li class="list-group-item list-group-item-warning justify-content-between">
                         <a asp-area="" asp-controller="Messages" asp-action="Index" asp-route-id="@messageList.ChatOwner.Id" title="@messageList.ChatOwner.UserName">@messageList.ChatOwner.UserName</a>
+                        <span class="small">@titleDate</span>
                     </li>
                 }
             }

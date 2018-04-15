@@ -121,6 +121,8 @@ namespace Razor_VS_Code_test.Controllers
                 model.Add(message);
             }
 
+            model = model.OrderByDescending( c => c.Messages.Last().Date).ToList();
+
             return View(model);
         }
     }

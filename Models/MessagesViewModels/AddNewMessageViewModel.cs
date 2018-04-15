@@ -8,7 +8,8 @@ namespace Razor_VS_Code_test.Models.MessagesViewModels
 {
     public class AddNewMessageViewModel
     {
-        [Required]
+        [Required(ErrorMessage="Обязательное поле")]
+        [Display(Name="Введите текст сообщения")]
         public string MessageText { get; set; }
         public string AuthorId { get; set; }
         public string ChatOwnerId { get; set; }

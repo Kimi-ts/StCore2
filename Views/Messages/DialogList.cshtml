@@ -1,19 +1,63 @@
 @model IList<MessagesListVievModel>
-@{
-    ViewData["Title"] = "Your list of messages";
-}
 
-<h4>@ViewData["Title"]</h4>
-<p>Here is the list of your dialogs:</p>
+@inject UserManager<ApplicationUser> UserManager
+
+<p class="text-muted">Ваши последние сообщения: </p>
+<hr />
 <div class="row">
-    <div class="col-md-12">
-        <ul>
+    <div class="col-md-6">
+
+<ul class="nav nav-tabs" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" data-toggle="tab" href="#home" role="tab">Клиенты</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#profile" role="tab">Партнёры</a>
+  </li>
+</ul>
+<div class="tab-content">
+  <div class="tab-pane active" id="home" role="tabpanel">
+        <ul class="list-group">
             @foreach (var messageList in Model)
             {
-                <li>
-                    <a asp-area="" asp-controller="Messages" asp-action="Index" asp-route-id="@messageList.ChatOwner.Id" title="@messageList.ChatOwner.UserName">@messageList.ChatOwner.UserName</a>
-                </li>
+                var lastMessage = messageList.Messages.Last();
+                var titleDate = lastMessage.Date.ToString("MM/dd/yy H:mm");
+                if (lastMessage.Date.Date == DateTime.Now.Date)
+                {
+                    titleDate = "сегодня в " + lastMessage.Date.ToString("H:mm");
+                }
+
+                @if (await UserManager.IsInRoleAsync(@messageList.ChatOwner, "Client"))
+                {
+                    <li class="list-group-item list-group-item-success justify-content-between">
+                        <a asp-area="" asp-controller="Messages" asp-action="Index" asp-route-id="@messageList.ChatOwner.Id" title="@messageList.ChatOwner.UserName">@messageList.ChatOwner.UserName</a>
+                        <span class="small">@titleDate</span>
+                    </li>
+                }
             }
         </ul>
-    </div>
+  </div>
+  <div class="tab-pane" id="profile" role="tabpanel">
+            <ul class="list-group">
+            @foreach (var messageList in Model)
+            {
+                var lastMessage = messageList.Messages.Last();
+                var titleDate = lastMessage.Date.ToString("MM/dd/yy H:mm");
+                if (lastMessage.Date.Date == DateTime.Now.Date)
+                {
+                    titleDate = "сегодня в " + lastMessage.Date.ToString("H:mm");
+                }
+
+                @if (await UserManager.IsInRoleAsync(@messageList.ChatOwner, "ShopOwner"))
+                {
+                    <li class="list-group-item list-group-item-warning justify-content-between">
+                        <a asp-area="" asp-controller="Messages" asp-action="Index" asp-route-id="@messageList.ChatOwner.Id" title="@messageList.ChatOwner.UserName">@messageList.ChatOwner.UserName</a>
+                        <span class="small">@titleDate</span>
+                    </li>
+                }
+            }
+        </ul>
+  </div>
+</div>
+</div>
 </div>

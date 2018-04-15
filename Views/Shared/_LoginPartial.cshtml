@@ -14,21 +14,21 @@
                         <a class="nav-link text-white-70" asp-area="" asp-controller="Settings" asp-action="Index" title="Управление">Управление</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white-70" asp-area="" asp-controller="Messages" asp-action="DialogList" title="Messages">Dialogs</a>
+                        <a class="nav-link text-white-70" asp-area="" asp-controller="Messages" asp-action="DialogList" title="Messages">Сообщения</a>
                     </li>
                 }
                 else
                 {
                     <li class="nav-item">
-                        <a class="nav-link text-white-70" asp-area="" asp-controller="Messages" asp-action="Index" asp-route-id="@UserManager.GetUserId(User)" title="Message">Messages</a>
+                        <a class="nav-link text-white-70" asp-area="" asp-controller="Messages" asp-action="Index" asp-route-id="@UserManager.GetUserId(User)" title="Message">Сообщения</a>
                     </li>
                 }
             <li class="nav-item">
-                <a class="nav-link text-white-70" asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+                <a class="nav-link text-white-70" asp-area="" asp-controller="Manage" asp-action="Index" title="Manage"> @UserManager.GetUserName(User)</a>
             </li>
             <li class="nav-item">
                 <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm">
-                    <button type="submit" class="btn navbar-btn navbar-link" role="button">Log out</button>
+                    <button type="submit" class="btn navbar-btn navbar-link" role="button">Выйти</button>
                 </form>
             </li>
         </ul>

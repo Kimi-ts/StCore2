@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Razor_VS_Code_test.Data;
 
 namespace Razor_VS_Code_test.Models
@@ -18,10 +19,10 @@ namespace Razor_VS_Code_test.Models
 
         public IList<Message> GetMessagesByUserId(string userId)
         {
-            var messages = (from m in _context.Messages
-                            where m.OwnerId == userId
-                            orderby m.Date
-                            select m).ToList();
+            var messages = _context.Messages
+                            .Include(m => m.Author)
+                            .Where(m => m.OwnerId == userId)
+                            .OrderBy(m => m.Date).ToList();
 
             return messages;
         }

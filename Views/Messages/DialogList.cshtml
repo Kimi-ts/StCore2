@@ -3,11 +3,11 @@
 <p class="text-muted">Ваши последние сообщения: </p>
 <hr />
 <div class="row">
-    <div class="col-md-12">
-        <ul>
+    <div class="col-md-6">
+        <ul class="list-group">
             @foreach (var messageList in Model)
             {
-                <li>
+                <li class="list-group-item list-group-item-success">
                     <a asp-area="" asp-controller="Messages" asp-action="Index" asp-route-id="@messageList.ChatOwner.Id" title="@messageList.ChatOwner.UserName">@messageList.ChatOwner.UserName</a>
                 </li>
             }

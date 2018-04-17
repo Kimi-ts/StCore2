@@ -9,6 +9,7 @@ using Razor_VS_Code_test.Models;
 using Microsoft.AspNetCore.Http;
 using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Hosting;
+using Razor_VS_Code_test.Utils;
 
 namespace Razor_VS_Code_test.Controllers
 {
@@ -16,16 +17,16 @@ namespace Razor_VS_Code_test.Controllers
     {
         private readonly IHostingEnvironment _environment;
 
-        // Constructor
-        public UploadFilesController(IHostingEnvironment IHostingEnvironment)
+        public UploadFilesController(IHostingEnvironment hostingEnvironment)
         {
-            _environment = IHostingEnvironment;
+            _environment = hostingEnvironment;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            string[] filePaths = Directory.GetFiles(Path.Combine(_environment.WebRootPath, Consts.DiscountImagesFolder), "*");
+            return View("~/Views/Settings/ImagesList.cshtml", filePaths);
         }
 
         [HttpPost]
@@ -57,10 +58,10 @@ namespace Razor_VS_Code_test.Controllers
                         newFileName = myUniqueFileName + FileExtension;
 
                         // Combines two strings into a path.
-                        fileName = Path.Combine(_environment.WebRootPath, "demoImages") + $@"\{newFileName}";
+                        fileName = Path.Combine(_environment.WebRootPath, Consts.DiscountImagesFolder) + $@"\{newFileName}";
 
                         // if you want to store path of folder in database
-                        PathDB = "demoImages/" + newFileName;
+                        PathDB = Consts.DiscountImagesFolder + "/" + newFileName;
 
                         using (FileStream fs = System.IO.File.Create(fileName))
                         {
@@ -70,9 +71,8 @@ namespace Razor_VS_Code_test.Controllers
                     }
                 }
 
-
             }
-            return View();
+            return RedirectToAction(nameof(Index));
         }
         public IActionResult Error()
         {

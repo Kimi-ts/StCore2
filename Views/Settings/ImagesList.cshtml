@@ -1,3 +1,6 @@
+@using Microsoft.Extensions.FileProviders
+@model string[]
+
 @{
     ViewData["Title"] = "Упраление изображениями";
     ViewData.AddActivePage(ManageNavPages.ManageImages);
@@ -7,6 +10,12 @@
 
 <p>Список существующих изображений:</p>
 
+<ul>
+    @foreach (string item in Model)
+    {
+        <li>@item</li>
+    }
+</ul>
 
 <form method="post" enctype="multipart/form-data" asp-controller="UploadFiles" asp-action="Index">
 <div class="form-group">

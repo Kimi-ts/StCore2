@@ -11,5 +11,6 @@ namespace Razor_VS_Code_test.Utils
     {
         public static string IconPrimaryPlaceholderUrl = "http://placehold.it/50/55C1E7/fff&text=";   
         public static string IconSuccessPlaceholderUrl = "http://placehold.it/50/5cb85c/fff&text=";
+        public static string DiscountImagesFolder = "DiscountImages";
     }
 }

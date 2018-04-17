@@ -25,6 +25,9 @@ namespace Razor_VS_Code_test.Models.DiscountsViewModels
         public DateTime ExpireDate { get; set; }
 
         [Required(ErrorMessage = "Обязательное поле")]
+        [Display(Name = "Изображение")]
+        public string ImgUrl { get; set; }
+
         [Display(Name = "Компания")]
         public string CompanyName { get; set; }
     }

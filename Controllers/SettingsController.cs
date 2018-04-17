@@ -93,7 +93,7 @@ namespace Razor_VS_Code_test.Controllers
             sale.Description = model.Description;
             sale.ShortDescription = model.ShortDescription;
             sale.IsActive = true;
-            sale.ImgUrl = string.Empty;
+            sale.ImgUrl = model.ImgUrl;
 
             await _discountManager.AddSaleAsync(sale);
 

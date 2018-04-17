@@ -1,14 +1,18 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Razor_VS_Code_test.Models;
 using Razor_VS_Code_test.Models.DiscountsViewModels;
 using Razor_VS_Code_test.Models.TagsViewModels;
+using Razor_VS_Code_test.Utils;
 
 namespace Razor_VS_Code_test.Controllers
 {
@@ -16,9 +20,11 @@ namespace Razor_VS_Code_test.Controllers
     {
         private readonly IDiscountManager _discountManager;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IHostingEnvironment _hostingEnvironment;
 
-        public SettingsController(UserManager<ApplicationUser> userManager, IDiscountManager discountManager)
+        public SettingsController(IHostingEnvironment hostingEnvironment, UserManager<ApplicationUser> userManager, IDiscountManager discountManager)
         {
+            _hostingEnvironment = hostingEnvironment;
             _userManager = userManager;
             _discountManager = discountManager;
         }
@@ -41,8 +47,8 @@ namespace Razor_VS_Code_test.Controllers
 
         public IActionResult Images()
         {
-            
-            return View();
+            string[] filePaths = Directory.GetFiles(Path.Combine(_hostingEnvironment.WebRootPath, Consts.DiscountImagesFolder), "*");
+            return View(filePaths);
         }
 
         [HttpPost]
@@ -88,6 +94,52 @@ namespace Razor_VS_Code_test.Controllers
             await _discountManager.AddSaleAsync(sale);
 
             return RedirectToAction(nameof(Discounts));
+        }
+
+        [HttpPost]
+        public IActionResult PostImage(string name)
+        {
+            var newFileName = string.Empty;
+
+            if (HttpContext.Request.Form.Files != null)
+            {
+                var fileName = string.Empty;
+                string PathDB = string.Empty;
+
+                var files = HttpContext.Request.Form.Files;
+
+                foreach (var file in files)
+                {
+                    if (file.Length > 0)
+                    {
+                        //Getting FileName
+                        fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+
+                        //Assigning Unique Filename (Guid)
+                        var myUniqueFileName = Convert.ToString(Guid.NewGuid());
+
+                        //Getting file Extension
+                        var FileExtension = Path.GetExtension(fileName);
+
+                        // concating  FileName + FileExtension
+                        newFileName = myUniqueFileName + FileExtension;
+
+                        // Combines two strings into a path.
+                        fileName = Path.Combine(_hostingEnvironment.WebRootPath, Consts.DiscountImagesFolder) + $@"\{newFileName}";
+
+                        // if you want to store path of folder in database
+                        PathDB = Consts.DiscountImagesFolder + "/" + newFileName;
+
+                        using (FileStream fs = System.IO.File.Create(fileName))
+                        {
+                            file.CopyTo(fs);
+                            fs.Flush();
+                        }
+                    }
+                }
+
+            }
+            return RedirectToAction(nameof(Images));
         }
 
         public IActionResult Error()

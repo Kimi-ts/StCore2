@@ -48,6 +48,10 @@ namespace Razor_VS_Code_test.Controllers
         public IActionResult Images()
         {
             string[] filePaths = Directory.GetFiles(Path.Combine(_hostingEnvironment.WebRootPath, Consts.DiscountImagesFolder), "*");
+            for(var i = 0; i< filePaths.Length; i++)
+            {
+                filePaths[i] = filePaths[i].Replace(_hostingEnvironment.WebRootPath, "");
+            }
             return View(filePaths);
         }
 

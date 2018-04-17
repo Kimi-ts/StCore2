@@ -13,7 +13,12 @@
 <ul>
     @foreach (string item in Model)
     {
-        <li>@item</li>
+        <li>@item
+        <picture>
+            <source media="(min-width: 650px)" srcset='@item'>
+            <img src=@@"@item" alt="Flowers" style="width:auto;">
+        </picture>
+        </li>
     }
 </ul>
 

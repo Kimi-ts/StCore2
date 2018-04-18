@@ -37,6 +37,15 @@ namespace Razor_VS_Code_test.Models
             return tags;
         }
 
+        public async Task<Sale> GetSaleByIdAsync(string id)
+        {
+            var sale = await _context.Sales
+                        .Where(m => m.SaleId == id)
+                        .FirstOrDefaultAsync();
+
+            return sale;
+        }
+
         public IList<Sale> GetSales(int maxCount, DateTime dateFrom, IList<string> tags, bool isIncludeOld)
         {
             var sales = _context.Sales
@@ -52,6 +61,12 @@ namespace Razor_VS_Code_test.Models
             return sales;
         }
 
+        public async Task RemoveSaleAsync(Sale sale)
+        {
+            _context.Sales.Remove(sale);
+            await _context.SaveChangesAsync();
+        }
+
         private bool isTagInCollection(IList<string> tagsToFind, Sale sale)
         {
             var result = false;
@@ -63,7 +78,7 @@ namespace Razor_VS_Code_test.Models
 
             if (sale.Tags.Count() == 0)
             {
-               return false;
+                return false;
             }
 
             List<string> tempArrayOfSaleTags = new List<string>();
@@ -78,7 +93,7 @@ namespace Razor_VS_Code_test.Models
                 return false;
             }
 
-            for (var i = 0; i< tagsToFind.Count; i++)
+            for (var i = 0; i < tagsToFind.Count; i++)
             {
                 if (tempArrayOfSaleTags.Contains(tagsToFind[i]))
                 {

@@ -48,7 +48,7 @@ namespace Razor_VS_Code_test.Controllers
         public IActionResult Images()
         {
             string[] filePaths = Directory.GetFiles(Path.Combine(_hostingEnvironment.WebRootPath, Consts.DiscountImagesFolder), "*");
-            for(var i = 0; i< filePaths.Length; i++)
+            for (var i = 0; i < filePaths.Length; i++)
             {
                 filePaths[i] = filePaths[i].Replace(_hostingEnvironment.WebRootPath, "");
             }
@@ -146,9 +146,19 @@ namespace Razor_VS_Code_test.Controllers
             return RedirectToAction(nameof(Images));
         }
 
-        public IActionResult Error()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RemoveSale(string id)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var sale = await _discountManager.GetSaleByIdAsync(id);
+            if (sale == null)
+            {
+                return RedirectToAction(nameof(Discounts));
+            }
+
+            await _discountManager.RemoveSaleAsync(sale);
+
+            return RedirectToAction(nameof(Discounts));
         }
     }
 }

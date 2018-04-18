@@ -13,5 +13,7 @@ namespace Razor_VS_Code_test.Models
         IList<Tag> GetAllTags();
         Task AddTagAsync(Tag tag);
         Task AddSaleAsync(Sale sale);
+        Task<Sale> GetSaleByIdAsync(string id);
+        Task RemoveSaleAsync(Sale sale);
     }
 }

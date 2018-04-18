@@ -1,4 +1,11 @@
+@using Microsoft.AspNetCore.Identity
 @model IList<Sale>  
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@{
+  var user = await UserManager.GetUserAsync(User);
+}
     
 <div class="row">
     @if (Model.Count == 0)
@@ -18,6 +25,15 @@
           <p class="text-muted">@sale.Description</p>
           <hr>
           <a href="#">Подробнее</a>
+          @if ((SignInManager.IsSignedIn(User)) && (await UserManager.IsInRoleAsync(user, "Administrator")))
+          {
+            <a class="" asp-area="" asp-controller="Settings" asp-action="EditSale" asp-route-id="@sale.SaleId" title="Edit">Редактировать</a>
+
+            <form asp-controller="Settings" asp-action="RemoveSale" method="POST" id="removeSaleForm">
+            <input type="hidden" name="id" value="@sale.SaleId" />
+            <input type="submit" value="Удалить" />
+            </form>
+          }
         </div>
       </div>
       }

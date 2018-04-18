@@ -15,5 +15,6 @@ namespace Razor_VS_Code_test.Models
         Task AddSaleAsync(Sale sale);
         Task<Sale> GetSaleByIdAsync(string id);
         Task RemoveSaleAsync(Sale sale);
+        Task UpdateSaleAsync(Sale sale);
     }
 }

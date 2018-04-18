@@ -55,6 +55,48 @@ namespace Razor_VS_Code_test.Controllers
             return View(filePaths);
         }
 
+        public async Task<IActionResult> EditSale(string id)
+        {
+            var sale = await _discountManager.GetSaleByIdAsync(id);
+            if (sale == null)
+            {
+                return RedirectToAction(nameof(Discounts));
+            }
+            var model = new AddNewSaleViewModel();
+            model.Id = sale.SaleId;
+            model.Title = sale.Title;
+            model.Description = sale.Description;
+            model.ShortDescription = sale.ShortDescription;
+            model.ExpireDate = sale.ExpireDate;
+            model.ImgUrl = sale.ImgUrl;
+            model.CompanyName = sale.CompanyName;
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditSale(AddNewSaleViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var sale = await _discountManager.GetSaleByIdAsync(model.Id);
+            sale.ExpireDate = model.ExpireDate;
+            sale.CompanyName = model.CompanyName;
+            sale.Title = model.Title;
+            sale.Description = model.Description;
+            sale.ShortDescription = model.ShortDescription;
+            sale.IsActive = true;
+            sale.ImgUrl = model.ImgUrl;
+
+            await _discountManager.UpdateSaleAsync(sale);
+
+            return RedirectToAction(nameof(Discounts));
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> PostTag(AddNewTagViewModel model)

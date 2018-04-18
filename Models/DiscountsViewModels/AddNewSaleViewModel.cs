@@ -8,6 +8,8 @@ namespace Razor_VS_Code_test.Models.DiscountsViewModels
 {
     public class AddNewSaleViewModel
     {
+        public string Id { get; set; }
+        
         [Required(ErrorMessage = "Обязательное поле")]
         [Display(Name = "Заголовок")]
         public string Title { get; set; }

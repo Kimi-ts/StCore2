@@ -67,6 +67,12 @@ namespace Razor_VS_Code_test.Models
             await _context.SaveChangesAsync();
         }
 
+        public async Task UpdateSaleAsync(Sale sale)
+        {
+            _context.Sales.Update(sale);
+            await _context.SaveChangesAsync();
+        }
+
         private bool isTagInCollection(IList<string> tagsToFind, Sale sale)
         {
             var result = false;

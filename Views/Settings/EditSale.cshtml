@@ -1,8 +1,6 @@
 @model AddNewSaleViewModel
 
-<p>Редактирование акции</p>
-
-<form asp-controller="Settings" asp-action="PostSale" method="POST">
+<form asp-controller="Settings" asp-action="EditSale" method="POST">
     <label asp-for="@Model.Title"></label>
     <input asp-for="@Model.Title" />
     <span asp-validation-for="@Model.Title" class="text-danger"></span>

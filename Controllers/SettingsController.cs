@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -16,6 +17,7 @@ using Razor_VS_Code_test.Utils;
 
 namespace Razor_VS_Code_test.Controllers
 {
+    [Authorize]
     public class SettingsController : Controller
     {
         private readonly IDiscountManager _discountManager;

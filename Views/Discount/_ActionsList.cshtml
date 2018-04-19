@@ -18,20 +18,21 @@
       {
       <div class="col-6 mb-3">
         <div class="card-img bg-faded">
-          <img src='@sale.ImgUrl' alt="my image"  style="max-width: 100%; max-height: 100%;"/>
+          <img src='@sale.ImgUrl' alt="my image"  style="max-width: 100%; max-height: 100%; width: 100%; height: 100%;"/>
         </div>
         <div class="card-block">
           <h6 class="card-subtitle">@sale.Title</h6>
           <p class="text-muted">@sale.Description</p>
           <hr>
           <a href="#">Подробнее</a>
+          <br >
           @if ((SignInManager.IsSignedIn(User)) && (await UserManager.IsInRoleAsync(user, "Administrator")))
           {
             <a class="" asp-area="" asp-controller="Settings" asp-action="EditSale" asp-route-id="@sale.SaleId" title="Edit">Редактировать</a>
 
             <form asp-controller="Settings" asp-action="RemoveSale" method="POST" id="removeSaleForm">
             <input type="hidden" name="id" value="@sale.SaleId" />
-            <input type="submit" value="Удалить" />
+            <input type="submit" value="Удалить" class="btn btn-danger" />
             </form>
           }
         </div>

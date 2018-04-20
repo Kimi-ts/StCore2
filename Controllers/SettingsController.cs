@@ -59,7 +59,7 @@ namespace Razor_VS_Code_test.Controllers
 
         public async Task<IActionResult> EditSale(string id)
         {
-            var sale = await _discountManager.GetSaleByIdAsync(id);
+            var sale = await _discountManager.GetSaleByIdWithTags(id);
             if (sale == null)
             {
                 return RedirectToAction(nameof(Discounts));
@@ -72,6 +72,16 @@ namespace Razor_VS_Code_test.Controllers
             model.ExpireDate = sale.ExpireDate;
             model.ImgUrl = sale.ImgUrl;
             model.CompanyName = sale.CompanyName;
+            model.AllTags = _discountManager.GetAllTags();
+            model.SelectedTags = new List<string>();
+
+            if (sale.Tags.Count() != 0)
+            {
+                foreach (Tag tag in sale.Tags)
+                {
+                    model.SelectedTags.Add(tag.TagId);
+                }
+            }
 
             return View(model);
         }
@@ -85,7 +95,7 @@ namespace Razor_VS_Code_test.Controllers
                 return View(model);
             }
 
-            var sale = await _discountManager.GetSaleByIdAsync(model.Id);
+            var sale = await _discountManager.GetSaleByIdWithTags(model.Id);
             sale.ExpireDate = model.ExpireDate;
             sale.CompanyName = model.CompanyName;
             sale.Title = model.Title;
@@ -93,6 +103,44 @@ namespace Razor_VS_Code_test.Controllers
             sale.ShortDescription = model.ShortDescription;
             sale.IsActive = true;
             sale.ImgUrl = model.ImgUrl;
+
+            if (model.SelectedTags == null)
+            {
+                model.SelectedTags = new List<string>();
+            }
+
+            if (model.SelectedTags != null && model.SelectedTags.Count != 0)
+            {
+                foreach (Tag tag in sale.Tags.ToList())
+                {
+                    var cheched = model.SelectedTags.FirstOrDefault(c => c == tag.TagId) != null;
+
+
+                    if (cheched == false)
+                    {
+                        await _discountManager.RemoveSaleTagAsync(sale, tag);
+                    }
+                }
+            }
+            else
+            {
+                foreach (Tag tag in sale.Tags.ToList())
+                {
+                    await _discountManager.RemoveSaleTagAsync(sale, tag);
+                }
+            }
+
+            foreach (string tagId in model.SelectedTags)
+            {
+                var res = sale.Tags.FirstOrDefault(c => c.TagId == tagId);
+                var alreadyChecked = (res != null);
+
+                if (alreadyChecked == false)
+                {
+                    var tag = await _discountManager.GetTagByIdAsync(tagId);
+                    await _discountManager.AddSaleTagAsyc(sale, tag);
+                }
+            }
 
             await _discountManager.UpdateSaleAsync(sale);
 
@@ -144,7 +192,7 @@ namespace Razor_VS_Code_test.Controllers
 
             if (model.SelectedTags.Count != 0)
             {
-                for(var i = 0; i< model.SelectedTags.Count; i++)
+                for (var i = 0; i < model.SelectedTags.Count; i++)
                 {
                     var tag = await _discountManager.GetTagByIdAsync(model.SelectedTags[i]);
                     await _discountManager.AddSaleTagAsyc(sale, tag);

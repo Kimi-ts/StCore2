@@ -34,6 +34,17 @@
                 <input class="form-control" asp-for="@Model.CompanyName" />
                 <span asp-validation-for="@Model.CompanyName" class="text-danger"></span>
             </div>
+            @{
+                foreach(Tag tag in @Model.AllTags)
+                {
+                    var res = @Model.SelectedTags.FirstOrDefault(c => c == tag.TagId);
+                    var cheched = (res != null);
+
+                    <input name="SelectedTags" value="@tag.TagId" type="checkbox" checked="@cheched" />
+                    <label asp-for="@tag">@tag.Category => @tag.Title</label>
+                    <br />
+                }
+            }
             <input type="submit" value="Отправить" class="btn btn-default" />
         </form>
         <a  asp-area="" asp-controller="Settings" asp-action="Discounts" title="Back to discounts">Вернуться к акциям</a>

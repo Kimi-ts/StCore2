@@ -56,6 +56,15 @@ namespace Razor_VS_Code_test.Models
             return sale;
         }
 
+        public async Task<Sale> GetSaleByIdWithTags(string id)
+        {
+                        var sale = await _context.Sales
+                        .Where(m => m.SaleId == id).Include("SaleTags.Tag")
+                        .FirstOrDefaultAsync();
+
+            return sale;
+        }
+
         public IList<Sale> GetSales(int maxCount, DateTime dateFrom, IList<string> tags, bool isIncludeOld)
         {
             var sales = _context.Sales
@@ -84,6 +93,16 @@ namespace Razor_VS_Code_test.Models
         {
             _context.Sales.Remove(sale);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task RemoveSaleTagAsync(Sale sale, Tag tag)
+        {
+            var saleTagToRemove = await _context.SaleTag
+            .Where(s => s.SaleId == sale.SaleId && s.TagId == tag.TagId).FirstOrDefaultAsync();
+
+             _context.SaleTag.Remove(saleTagToRemove);
+             await _context.SaveChangesAsync();
+
         }
 
         public async Task UpdateSaleAsync(Sale sale)

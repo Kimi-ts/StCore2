@@ -23,6 +23,16 @@ namespace Razor_VS_Code_test.Models
             await _context.SaveChangesAsync();
         }
 
+        public async Task AddSaleTagAsyc(Sale sale, Tag tag)
+        {
+            var saleTag = new SaleTag();
+            saleTag.Sale = sale;
+            saleTag.Tag = tag;
+
+            await _context.SaleTag.AddAsync(saleTag);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task AddTagAsync(Tag tag)
         {
             await _context.Tags.AddAsync(tag);
@@ -59,6 +69,15 @@ namespace Razor_VS_Code_test.Models
             sales = sales.Where(s => isTagInCollection(tags, s)).ToList();
 
             return sales;
+        }
+
+        public async Task<Tag> GetTagByIdAsync(string id)
+        {
+            var tag = await _context.Tags
+            .Where(t => t.TagId == id)
+            .FirstOrDefaultAsync();
+
+            return tag;
         }
 
         public async Task RemoveSaleAsync(Sale sale)

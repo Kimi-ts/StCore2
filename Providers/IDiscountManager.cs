@@ -14,7 +14,9 @@ namespace Razor_VS_Code_test.Models
         Task AddTagAsync(Tag tag);
         Task AddSaleAsync(Sale sale);
         Task<Sale> GetSaleByIdAsync(string id);
+        Task<Tag> GetTagByIdAsync(string id);
         Task RemoveSaleAsync(Sale sale);
         Task UpdateSaleAsync(Sale sale);
+        Task AddSaleTagAsyc(Sale sale, Tag tag);
     }
 }

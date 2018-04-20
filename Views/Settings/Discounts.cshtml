@@ -1,4 +1,7 @@
 @model IList<Sale>
+
+@inject IDiscountManager _discountManager
+
 @{
     ViewData["Title"] = "Упраление акциями";
     ViewData.AddActivePage(ManageNavPages.ManageActions);
@@ -9,7 +12,7 @@
 @Html.Partial("~/Views/Discount/_ActionsList.cshtml", @Model)
 <hr />
 
-@Html.Partial("_AddNewSale", new AddNewSaleViewModel())
+@Html.Partial("_AddNewSale", new AddNewSaleViewModel{ AllTags = _discountManager.GetAllTags(), SelectedTags = new List<string>() })
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")
 }

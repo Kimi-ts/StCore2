@@ -32,5 +32,7 @@ namespace Razor_VS_Code_test.Models.DiscountsViewModels
 
         [Display(Name = "Компания")]
         public string CompanyName { get; set; }
+        public IList<Tag> AllTags {get; set;}
+        public IList<string> SelectedTags {get; set;}
     }
 }

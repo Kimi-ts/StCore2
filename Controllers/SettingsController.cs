@@ -141,6 +141,16 @@ namespace Razor_VS_Code_test.Controllers
 
             await _discountManager.AddSaleAsync(sale);
 
+
+            if (model.SelectedTags.Count != 0)
+            {
+                for(var i = 0; i< model.SelectedTags.Count; i++)
+                {
+                    var tag = await _discountManager.GetTagByIdAsync(model.SelectedTags[i]);
+                    await _discountManager.AddSaleTagAsyc(sale, tag);
+                }
+            }
+
             return RedirectToAction(nameof(Discounts));
         }
 

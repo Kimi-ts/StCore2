@@ -10,7 +10,14 @@ namespace Razor_VS_Code_test.Models.DiscountsViewModels
     {
         public IList<Sale> Sales { get; set; }
         public bool IsDisplayNew { get; set; }
-        public IList<Tag> Tags { get; set; }
+        public IList<TagSalesCounter> FilteredTags {get; set;}
         public IList<string> Categories { get; set; }
+
+        public class TagSalesCounter
+        {
+            public string Category {get; set;}
+            public string Title {get; set;}
+            public int SalesCount {get; set;}
+        }
     }
 }

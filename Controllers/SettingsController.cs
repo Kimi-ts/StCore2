@@ -69,6 +69,7 @@ namespace Razor_VS_Code_test.Controllers
             model.Title = sale.Title;
             model.Description = sale.Description;
             model.ShortDescription = sale.ShortDescription;
+            model.StartDate = sale.CreatedDate;
             model.ExpireDate = sale.ExpireDate;
             model.ImgUrl = sale.ImgUrl;
             model.CompanyName = sale.CompanyName;
@@ -96,6 +97,7 @@ namespace Razor_VS_Code_test.Controllers
             }
 
             var sale = await _discountManager.GetSaleByIdWithTags(model.Id);
+            sale.CreatedDate = model.StartDate;
             sale.ExpireDate = model.ExpireDate;
             sale.CompanyName = model.CompanyName;
             sale.Title = model.Title;
@@ -178,7 +180,7 @@ namespace Razor_VS_Code_test.Controllers
 
             var sale = new Sale();
             sale.OwnerId = user.Id;
-            sale.CreatedDate = DateTime.Now;
+            sale.CreatedDate = model.StartDate;
             sale.ExpireDate = model.ExpireDate;
             sale.CompanyName = model.CompanyName;
             sale.Title = model.Title;
@@ -190,6 +192,11 @@ namespace Razor_VS_Code_test.Controllers
             await _discountManager.AddSaleAsync(sale);
 
 
+            if (model.SelectedTags == null)
+            {
+                model.SelectedTags = new List<string>();
+            }
+            
             if (model.SelectedTags.Count != 0)
             {
                 for (var i = 0; i < model.SelectedTags.Count; i++)

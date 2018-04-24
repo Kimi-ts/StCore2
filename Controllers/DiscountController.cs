@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Razor_VS_Code_test.Models;
 using Razor_VS_Code_test.Models.DiscountsViewModels;
+using static Razor_VS_Code_test.Models.DiscountsViewModels.DiscountsListViewModel;
 
 namespace Razor_VS_Code_test.Controllers
 {
@@ -18,11 +19,12 @@ namespace Razor_VS_Code_test.Controllers
             _discountManager = discountManager;
         }
 
-        public IActionResult Index(int count, bool isDisplayNew, string tags)
+        public IActionResult Index(int count, bool isDisplayNew, string filteredTags)
         {
             List<string> tagsList = new List<string>();
-            if (tags != "all"){
-                tagsList = tags.Split(',').ToList();
+            if (filteredTags != "all")
+            {
+                tagsList = filteredTags.Split(',').ToList();
             }
 
             DateTime start = DateTime.Now.AddYears(-1);
@@ -32,10 +34,23 @@ namespace Razor_VS_Code_test.Controllers
             }
             var model = new DiscountsListViewModel();
             model.Sales = _discountManager.GetSales(count, start, tagsList, false);
-            model.Tags = _discountManager.GetAllTags();
 
-            var categories = model.Tags
-                            .Where( t => t.Sales.Count() > 0)
+            var allTags = _discountManager.GetAllTagsWithSales();
+
+            model.FilteredTags = new List<TagSalesCounter>();
+
+            foreach(var tag in allTags)
+            {
+                TagSalesCounter filteredTag = new TagSalesCounter();
+                filteredTag.Category = tag.Category;
+                filteredTag.Title = tag.Title;
+
+                filteredTag.SalesCount = tag.Sales.Where(s => s.CreatedDate > start && s.ExpireDate >= DateTime.Now).ToList().Count;
+                model.FilteredTags.Add(filteredTag);
+            }
+
+            var categories = allTags
+                            .Where(t => t.Sales.Count() > 0)
                             .Select(c => c.Category)
                             .Distinct().ToList();
             model.Categories = categories;

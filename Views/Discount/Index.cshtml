@@ -15,7 +15,7 @@
           <input asp-for="@Model.IsDisplayNew" />
           <label asp-for="@Model.IsDisplayNew">Только новые</label>
         </div>
-        <input type="hidden" value="all" asp-for="@Model.Tags" />
+        <input type="hidden" value="all" asp-for="@Model.FilteredTags" />
         <button type="submit" class="btn btn-secondary btn-sm">Применить</button>
       </fieldset>
     </form>
@@ -24,11 +24,11 @@
       {
         <h6>@category</h6>
         <ul class="list-unstyled">
-        @foreach(var tag in Model.Tags)
+        @foreach(var tag in Model.FilteredTags)
         {
           if (tag.Category == category)
           {
-            <li><a class="" asp-area="" asp-controller="Discount" asp-action="Index" asp-route-count="16" asp-route-isDisplayNew="@Model.IsDisplayNew" asp-route-tags="@tag.Title">@tag.Title (@tag.Sales.Count())</a></li>
+            <li><a class="" asp-area="" asp-controller="Discount" asp-action="Index" asp-route-count="16" asp-route-isDisplayNew="@Model.IsDisplayNew" asp-route-filteredTags="@tag.Title">@tag.Title (@tag.SalesCount)</a></li>
           }
         }
         </ul>

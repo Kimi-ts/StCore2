@@ -21,6 +21,9 @@ namespace Razor_VS_Code_test.Models.DiscountsViewModels
         [Required(ErrorMessage = "Обязательное поле")]
         [Display(Name = "Краткое описание")]
         public string ShortDescription { get; set; }
+        [Display(Name = "Дата начала")]
+        [Required(ErrorMessage = "Обязательное поле")]
+        public DateTime StartDate { get; set; }
 
         [Display(Name = "Дата окончания")]
         [Required(ErrorMessage = "Обязательное поле")]

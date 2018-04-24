@@ -42,6 +42,13 @@ namespace Razor_VS_Code_test.Models
         public IList<Tag> GetAllTags()
         {
             var tags = _context.Tags
+            .ToList();
+            return tags;
+        }
+
+        public IList<Tag> GetAllTagsWithSales()
+        {
+            var tags = _context.Tags
                         .Include("SaleTags.Sale")
                         .ToList();
             return tags;
@@ -58,9 +65,9 @@ namespace Razor_VS_Code_test.Models
 
         public async Task<Sale> GetSaleByIdWithTags(string id)
         {
-                        var sale = await _context.Sales
-                        .Where(m => m.SaleId == id).Include("SaleTags.Tag")
-                        .FirstOrDefaultAsync();
+            var sale = await _context.Sales
+            .Where(m => m.SaleId == id).Include("SaleTags.Tag")
+            .FirstOrDefaultAsync();
 
             return sale;
         }
@@ -100,8 +107,8 @@ namespace Razor_VS_Code_test.Models
             var saleTagToRemove = await _context.SaleTag
             .Where(s => s.SaleId == sale.SaleId && s.TagId == tag.TagId).FirstOrDefaultAsync();
 
-             _context.SaleTag.Remove(saleTagToRemove);
-             await _context.SaveChangesAsync();
+            _context.SaleTag.Remove(saleTagToRemove);
+            await _context.SaveChangesAsync();
 
         }
 

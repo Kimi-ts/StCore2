@@ -11,6 +11,7 @@ namespace Razor_VS_Code_test.Models
     {
         IList<Sale> GetSales(int maxCount, DateTime dateFrom, IList<string> tags, bool isIncludeOld);
         IList<Tag> GetAllTags();
+        IList<Tag> GetAllTagsWithSales();
         Task AddTagAsync(Tag tag);
         Task AddSaleAsync(Sale sale);
         Task<Sale> GetSaleByIdAsync(string id);

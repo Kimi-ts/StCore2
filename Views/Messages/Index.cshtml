@@ -45,6 +45,16 @@
             }
         </ul>
     </div>
+    <div class="col-md-6">
+        @{if (await UserManager.IsInRoleAsync(@Model.CurrentUser, "Client"))
+        {
+        <div class="jumbotron">
+            <h1 class="display-5">Не забудьте сказать нам о важном</h1>
+            <p class="lead">Пожалуйста, в своём сообщении укажите ваше имя, суть вашей проблемы, срочность выполнения работ, марку и год выпуска авто, ваш адрес, а также удобный вам способ связи - мы можем перезвонить вам или ответить на ваш email.</p>
+        </div>
+        }
+        }
+    </div>
 </div>
 @Html.Partial("_AddNewMessage", new  AddNewMessageViewModel{ MessageText = String.Empty, AuthorId = @Model.CurrentUser.Id, ChatOwnerId = @Model.ChatOwner.Id})
 @section Scripts {

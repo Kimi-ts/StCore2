@@ -16,6 +16,7 @@ namespace Razor_VS_Code_test.Models.DiscountsViewModels
 
         [Required(ErrorMessage = "Обязательное поле")]
         [Display(Name = "Подробное описание")]
+        [MinLength(50)]
         public string Description { get; set; }
 
         [Required(ErrorMessage = "Обязательное поле")]

@@ -7,7 +7,7 @@
   var user = await UserManager.GetUserAsync(User);
 }
     
-<div class="row">
+<div class="row" id="salesCollectionArea">
     @if (Model.Count == 0)
       {
         <div class="col-12">
@@ -22,9 +22,10 @@
         </div>
         <div class="card-block">
           <h6 class="card-subtitle">@sale.Title</h6>
-          <p class="text-muted cut-single-line">@sale.Description</p>
+          <p class="text-muted" v-bind:class="{ 'cut-single-line': activeItemNumber != @Model.IndexOf(sale) }" >@sale.Description</p>
           <hr>
-          <a href="#">Подробнее</a>
+          <a href="#" v-if = "activeItemNumber != @Model.IndexOf(sale)" v-on:click = "setActiveItem(@Model.IndexOf(sale))">Подробнее</a>
+          <a href="#" v-if = "activeItemNumber == @Model.IndexOf(sale)" v-on:click = "setActiveItem(-1)">Скрыть</a>
           <br >
           @if ((SignInManager.IsSignedIn(User)) && (await UserManager.IsInRoleAsync(user, "Administrator")))
           {

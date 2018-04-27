@@ -9,17 +9,22 @@
 <p class="text-muted">@ViewData["Title"]</p>
 
 <p>Список существующих изображений:</p>
-<div class="row">
+<div class="row" id="imagesPanel">
+    @{
+        var i = 0;
+    }
     @foreach (string item in Model)
     {
+        var textAreaId = "imageSrc" + @i;
         <div class="col-3">
-        <picture>
-            <source srcset='@item'>
-            <img src='@item' alt="Flowers" style="max-width: 100%; height: 160px;">
-        </picture>
-        <p>@item</p>
-        <p><button type="button" class="btn btn-secondary">Копировать ссылку</button></p>
+            <picture>
+                <source srcset='@item'>
+                <img src='@item' alt="Flowers" style="max-width: 100%; height: 160px;">
+            </picture>
+            <textarea rows="4" readonly id=@textAreaId>@item</textarea>
+            <p><button v-on:click = 'copyToClipboard("@textAreaId")' type="button" class="btn btn-secondary">Копировать ссылку</button></p>
         </div>
+        i++;
     }
 </div>
 

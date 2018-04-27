@@ -10,6 +10,7 @@
     "inputFiles": [
       "wwwroot/js/addTagForm.js",
       "wwwroot/js/toggleSaleDescriptionVisibility.js",
+      "wwwroot/js/imagePanel.js",
       "wwwroot/js/site.js"
     ],
     "minify": {

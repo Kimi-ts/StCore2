@@ -6,11 +6,32 @@
 
 <p class="text-muted">@ViewData["Title"]</p>
 
+@{
+    var allCategories = @Model.Select(c => c.Category).Distinct().ToList();
+}
+
 <p>Список существующих тэгов:</p>
-<ul>
-    @foreach (var tag in Model)
-    {
-        <li>@tag.Category @tag.Title</li>
+<ul class="list-unstyled">
+    @foreach(var category in allCategories){
+        <li class="mb-3">
+            <h5>@category</h5>
+            <ul class="list-unstyled">
+                @foreach (var tag in Model)
+                {
+                    @if (tag.Category == category){
+                        <li>
+                            @tag.Title 
+                            <form asp-controller="Settings" asp-action="RemoveTag" method="POST" id="removeTagForm" class="d-inline">
+                                <input type="hidden" name="id" value="@tag.TagId" />
+                                <button type="submit"  value="Удалить" class="btn btn-danger btn-sm">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </form>
+                        </li>
+                    }
+                }
+            </ul>
+        </li>
     }
 </ul>
 

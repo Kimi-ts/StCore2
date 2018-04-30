@@ -1,22 +1,31 @@
 @model AddNewTagViewModel
 
+<p class="text-muted mt-5">Добавить новый тэг</p>
 <form asp-controller="Settings" asp-action="PostTag" method="POST" id="newTagForm">
-    @{
-        for(int i = 0; i < Model.AllCategories.Count(); i++)
-        {
-            <input asp-for="@Model.Tag.Category" value="@Model.AllCategories[i]" type="radio" />
-            <label asp-for="@Model.AllCategories[i]">@Model.AllCategories[i]</label>
+    <fieldset>
+        <p>Выберите категорию</p>
+        @{
+            for(int i = 0; i < Model.AllCategories.Count(); i++)
+            {
+                <div class="form-check">
+                    <input asp-for="@Model.Tag.Category" value="@Model.AllCategories[i]" type="radio" class="form-check-input" />
+                    <label asp-for="@Model.AllCategories[i]" class="form-check-label">@Model.AllCategories[i]</label>
+                </div>
+            }
         }
-    }
-    <input v-if="addNew" :value = "newCategory" type="radio" id="Tag_Category" name="Tag.Category" class="input-validation-error">
-    <label v-if="addNew" for="">{{newCategory}}</label>
-    <br />
-    <button v-on:click="addNewCategory">Добавить категорию</button>
-    <input type="text" v-model="newCategory" />
-    <br />
-    <label asp-for="@Model.Tag.Title"></label>
-    <input asp-for="@Model.Tag.Title" />
-    <span asp-validation-for="@Model.Tag.Title" class="text-danger"></span>
-    <br />
-    <input type="submit" value="Отправить" />
+        <input v-if="addNew" :value = "newCategory" type="radio" id="Tag_Category" name="Tag.Category" class="input-validation-error">
+        <label v-if="addNew" for="">{{newCategory}}</label>
+        <div class="form-group">
+            <input v-if="showNewTextBox" class="form-control col-4" type="text" v-model="newCategory" placeholder="Новая категория" />
+        </div>
+        <button type="button" class="btn" v-on:click="addNewCategory">Добавить категорию</button>
+    </fieldset>
+    <fieldset>
+        <div class="form-group">
+            <label asp-for="@Model.Tag.Title"></label>
+            <input asp-for="@Model.Tag.Title" class="form-control col-4" />
+            <span asp-validation-for="@Model.Tag.Title" class="text-danger"></span>
+        </div>
+    </fieldset>
+    <input type="submit" class="btn" value="Отправить" />
 </form>

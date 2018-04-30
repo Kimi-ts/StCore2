@@ -196,7 +196,7 @@ namespace Razor_VS_Code_test.Controllers
             {
                 model.SelectedTags = new List<string>();
             }
-            
+
             if (model.SelectedTags.Count != 0)
             {
                 for (var i = 0; i < model.SelectedTags.Count; i++)
@@ -268,6 +268,21 @@ namespace Razor_VS_Code_test.Controllers
             await _discountManager.RemoveSaleAsync(sale);
 
             return RedirectToAction(nameof(Discounts));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RemoveTag(string id)
+        {
+            var tag = await _discountManager.GetTagByIdAsync(id);
+            if (tag == null)
+            {
+                return RedirectToAction(nameof(Tags));
+            }
+
+            await _discountManager.RemoveTagAsync(tag);
+
+            return RedirectToAction(nameof(Tags));
         }
     }
 }

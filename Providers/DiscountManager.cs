@@ -112,6 +112,12 @@ namespace Razor_VS_Code_test.Models
 
         }
 
+        public async Task RemoveTagAsync(Tag tag)
+        {
+            _context.Tags.Remove(tag);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task UpdateSaleAsync(Sale sale)
         {
             _context.Sales.Update(sale);

@@ -3,12 +3,18 @@ var addTagForm = new Vue({
     data: {
         newCategory: '',
         newValue: '',
-        addNew: false
+        addNew: false,
+        showNewTextBox: false,
     },
     methods: {
       addNewCategory: function () {
-        if (this.newCategory){
-          this.addNew = true;
+        if (this.showNewTextBox){
+          if (this.newCategory){
+            this.addNew = true;
+          }
+        }
+        else{
+          this.showNewTextBox = true;
         }
       }
     }

@@ -17,8 +17,6 @@ namespace Razor_VS_Code_test.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
-
             return View();
         }
 

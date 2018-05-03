@@ -10,9 +10,16 @@ namespace Razor_VS_Code_test.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ISliderItemManager _sliderManager;
+
+        public HomeController(ISliderItemManager sliderManamger)
+        {
+            _sliderManager = sliderManamger;
+        }
         public IActionResult Index()
         {
-            return View();
+            var slides = _sliderManager.GetFilteredSliderItems(false, true);
+            return View(slides);
         }
 
         public IActionResult About()

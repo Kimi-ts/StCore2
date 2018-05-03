@@ -33,6 +33,7 @@ namespace Razor_VS_Code_test.Data
         public DbSet<Message> Messages { get; set; }
         public DbSet<Sale> Sales { get; set; }
         public DbSet<Tag> Tags { get; set; }
-        public DbSet<SaleTag> SaleTag {get; set;}
+        public DbSet<SaleTag> SaleTag { get; set; }
+        public DbSet<SliderItem> SliderItems { get; set; }
     }
 }

@@ -35,6 +35,8 @@ namespace Razor_VS_Code_test
 
             services.AddScoped<IMessageManager, MessageManager>();
             services.AddScoped<IDiscountManager, DiscountManager>();
+            services.AddScoped<ISliderItemManager, SliderItemManager>();
+
 
             services.AddAuthentication().AddGoogle(googleOptions =>
             {

@@ -23,16 +23,24 @@ namespace Razor_VS_Code_test.Controllers
         private readonly IDiscountManager _discountManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly ISliderItemManager _sliderManager;
 
-        public SettingsController(IHostingEnvironment hostingEnvironment, UserManager<ApplicationUser> userManager, IDiscountManager discountManager)
+        public SettingsController(IHostingEnvironment hostingEnvironment, UserManager<ApplicationUser> userManager, IDiscountManager discountManager, ISliderItemManager sliderManager)
         {
             _hostingEnvironment = hostingEnvironment;
             _userManager = userManager;
             _discountManager = discountManager;
+            _sliderManager = sliderManager;
         }
         public IActionResult Index()
         {
             return View();
+        }
+
+        public IActionResult Slider()
+        {
+            var slides = _sliderManager.GetAllSliderItems();
+            return View(slides);
         }
 
         public IActionResult Discounts()

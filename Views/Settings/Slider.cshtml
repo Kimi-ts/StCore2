@@ -1,0 +1,15 @@
+@model IList<SliderItem>
+
+@inject IDiscountManager _discountManager
+
+@{
+    ViewData["Title"] = "Упраление слайдером";
+    ViewData.AddActivePage(ManageNavPages.ManageSlider);
+}
+
+<p class="text-muted">@ViewData["Title"]</p>
+
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

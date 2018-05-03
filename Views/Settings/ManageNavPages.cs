@@ -19,6 +19,8 @@ namespace Razor_VS_Code_test.Views.Settings
 
         public static string ManageImages => "ManageImages";
 
+        public static string ManageSlider => "ManageSlider";
+
 
         public static string IndexNavClass(ViewContext viewContext) => PageNavClass(viewContext, Index);
 
@@ -27,6 +29,8 @@ namespace Razor_VS_Code_test.Views.Settings
         public static string ManagetTagsNavClass(ViewContext viewContext) => PageNavClass(viewContext, ManageTags);
 
         public static string ManageImagesNavClass(ViewContext viewContext) => PageNavClass(viewContext, ManageImages);
+
+        public static string ManageSliderNavClass(ViewContext viewContext) => PageNavClass(viewContext, ManageSlider);
     
         public static string PageNavClass(ViewContext viewContext, string page)
         {

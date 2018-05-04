@@ -9,6 +9,31 @@
 
 <p class="text-muted">@ViewData["Title"]</p>
 
+<div class="row">
+
+        @foreach(var item in Model)
+        {
+            <div class="col-12">
+            @Html.Raw(item.Content)
+            </div>
+            <div class="col-11">
+                <p class="bg-info p-1">Порядковый номер: @item.OrderNumber Активна: @item.IsActive Дата окончания: @item.ExpireDate.Date
+                <a class="text-white pull-right" asp-area="" asp-controller="Settings" asp-action="EditSliderItem" asp-route-id="@item.SliderItemId" title="Edit">Редактировать</a>
+            </div>
+            <div class="col-1">
+                <form asp-controller="Settings" asp-action="RemoveSliderItem" method="POST" id="removeSliderItemForm">
+                <input type="hidden" name="id" value="@item.SliderItemId" />
+                <button type="submit" value="Удалить" class="btn btn-danger btn-sm">
+                    <span aria-hidden="true">×</span>
+                </button>
+                </form>
+            </div>
+        }
+</div>
+
+<hr />
+
+@Html.Partial("_AddNewSliderItem", new SliderItem())
 
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")

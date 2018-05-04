@@ -265,6 +265,26 @@ namespace Razor_VS_Code_test.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        public async Task<IActionResult> PostSlideItem(SliderItem model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            }
+
+            await _sliderManager.AddSliderItemAsync(model);
+
+            return RedirectToAction(nameof(Slider));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> RemoveSale(string id)
         {
             var sale = await _discountManager.GetSaleByIdAsync(id);

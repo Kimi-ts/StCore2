@@ -4,7 +4,7 @@
   <div class="carousel-inner">
     @foreach(var item in @Model)
     {
-      var isActive = item.OrderNumber == 1? "active" : "";
+      var isActive = Model.IndexOf(item) == 0 ? "active" : "";
       <div class="carousel-item @isActive" >
         @Html.Raw(item.Content)
       </div>

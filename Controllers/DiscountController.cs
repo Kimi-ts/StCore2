@@ -39,7 +39,7 @@ namespace Razor_VS_Code_test.Controllers
 
             model.FilteredTags = new List<TagSalesCounter>();
 
-            foreach(var tag in allTags)
+            foreach (var tag in allTags)
             {
                 TagSalesCounter filteredTag = new TagSalesCounter();
                 filteredTag.Category = tag.Category;
@@ -49,10 +49,11 @@ namespace Razor_VS_Code_test.Controllers
                 model.FilteredTags.Add(filteredTag);
             }
 
-            var categories = allTags
-                            .Where(t => t.Sales.Count() > 0)
+            var categories = model.FilteredTags
+                            .Where(t => t.SalesCount > 0)
                             .Select(c => c.Category)
                             .Distinct().ToList();
+
             model.Categories = categories;
 
             model.IsDisplayNew = isDisplayNew;

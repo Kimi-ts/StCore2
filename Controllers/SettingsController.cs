@@ -157,6 +157,31 @@ namespace Razor_VS_Code_test.Controllers
             return RedirectToAction(nameof(Discounts));
         }
 
+        public async Task<IActionResult> EditSliderItem(string id)
+        {
+            var item = await _sliderManager.GetSliderItemByIdAsync(id);
+            if (item == null)
+            {
+                return RedirectToAction(nameof(Slider));
+            }
+
+            return View(item);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditSliderItem(SliderItem model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            await _sliderManager.UpdateSliderItemAsync(model);
+
+            return RedirectToAction(nameof(Slider));
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> PostTag(AddNewTagViewModel model)
@@ -296,6 +321,21 @@ namespace Razor_VS_Code_test.Controllers
             await _discountManager.RemoveSaleAsync(sale);
 
             return RedirectToAction(nameof(Discounts));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RemoveSliderItem(string id)
+        {
+            var item = await _sliderManager.GetSliderItemByIdAsync(id);
+            if (item == null)
+            {
+                return RedirectToAction(nameof(Slider));
+            }
+
+            await _sliderManager.RemoveTagAsync(item);
+
+            return RedirectToAction(nameof(Slider));
         }
 
         [HttpPost]

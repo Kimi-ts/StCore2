@@ -1,0 +1,32 @@
+@model SliderItem
+
+<h5 class="bp-3">Добавить новый слайд</h5>
+<div class="row">
+    <div class="col-md-6">
+        <form asp-controller="Settings" asp-action="EditSliderItem" method="POST" class="mb-3">
+            <div class="form-group">
+                <label asp-for="@Model.Content"></label>
+                <textarea rows="4" class="form-control" asp-for="@Model.Content"></textarea>
+                <span asp-validation-for="@Model.Content" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <input class="form-check-input" asp-for="@Model.IsActive" />
+                <label class="form-check-label" asp-for="@Model.IsActive"></label>
+                <span asp-validation-for="@Model.IsActive" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.OrderNumber"></label>
+                <input class="form-control" asp-for="@Model.OrderNumber" value = "1" />
+                <span asp-validation-for="@Model.OrderNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.ExpireDate"></label>
+                <input class="form-control" asp-for="@Model.ExpireDate" />
+                <span asp-validation-for="@Model.ExpireDate" class="text-danger"></span>
+            </div>
+            <input type="hidden" name="SliderItemId" value="@Model.SliderItemId" />
+            <input type="submit" value="Отправить" class="btn btn-default" />
+        </form>
+        <a  asp-area="" asp-controller="Settings" asp-action="Slider" title="Back to slider">Вернуться к слайдеру</a>
+    </div>
+</div>

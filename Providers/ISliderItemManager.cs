@@ -13,5 +13,7 @@ namespace Razor_VS_Code_test.Models
         IList<SliderItem> GetFilteredSliderItems(bool isShowExpired, bool isShowActive);
         Task AddSliderItemAsync (SliderItem item);
         Task<SliderItem> GetSliderItemByIdAsync (string id);
+        Task UpdateSliderItemAsync(SliderItem item);
+        Task RemoveTagAsync(SliderItem item);
     }
 }

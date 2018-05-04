@@ -39,5 +39,17 @@ namespace Razor_VS_Code_test.Models
         {
             return await _context.SliderItems.Where(c => c.SliderItemId == id).FirstOrDefaultAsync();
         }
+
+        public async Task RemoveTagAsync(SliderItem item)
+        {
+            _context.SliderItems.Remove(item);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateSliderItemAsync(SliderItem item)
+        {
+            _context.SliderItems.Update(item);
+            await _context.SaveChangesAsync();
+        }
     }
 }

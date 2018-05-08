@@ -24,13 +24,15 @@ namespace Razor_VS_Code_test.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly ISliderItemManager _sliderManager;
+        private readonly IPartnerManager _partnerManager;
 
-        public SettingsController(IHostingEnvironment hostingEnvironment, UserManager<ApplicationUser> userManager, IDiscountManager discountManager, ISliderItemManager sliderManager)
+        public SettingsController(IHostingEnvironment hostingEnvironment, UserManager<ApplicationUser> userManager, IDiscountManager discountManager, ISliderItemManager sliderManager, IPartnerManager partnerManager)
         {
             _hostingEnvironment = hostingEnvironment;
             _userManager = userManager;
             _discountManager = discountManager;
             _sliderManager = sliderManager;
+            _partnerManager = partnerManager;
         }
         public IActionResult Index()
         {
@@ -63,6 +65,12 @@ namespace Razor_VS_Code_test.Controllers
                 filePaths[i] = filePaths[i].Replace(_hostingEnvironment.WebRootPath, "");
             }
             return View(filePaths);
+        }
+
+        public IActionResult Partners()
+        {
+            var partners = _partnerManager.GetAllPartners();
+            return View(partners);
         }
 
         public async Task<IActionResult> EditSale(string id)
@@ -306,6 +314,26 @@ namespace Razor_VS_Code_test.Controllers
             await _sliderManager.AddSliderItemAsync(model);
 
             return RedirectToAction(nameof(Slider));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> PostPartner(Partner model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            }
+
+            await _partnerManager.AddPartnerAsync(model);
+
+            return RedirectToAction(nameof(Partners));
         }
 
         [HttpPost]

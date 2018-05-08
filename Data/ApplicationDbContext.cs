@@ -35,5 +35,6 @@ namespace Razor_VS_Code_test.Data
         public DbSet<Tag> Tags { get; set; }
         public DbSet<SaleTag> SaleTag { get; set; }
         public DbSet<SliderItem> SliderItems { get; set; }
+        public DbSet<Partner> Partners {get; set; }
     }
 }

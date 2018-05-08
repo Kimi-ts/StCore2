@@ -21,6 +21,8 @@ namespace Razor_VS_Code_test.Views.Settings
 
         public static string ManageSlider => "ManageSlider";
 
+        public static string ManagePartners => "ManagePartners";
+
 
         public static string IndexNavClass(ViewContext viewContext) => PageNavClass(viewContext, Index);
 
@@ -31,6 +33,8 @@ namespace Razor_VS_Code_test.Views.Settings
         public static string ManageImagesNavClass(ViewContext viewContext) => PageNavClass(viewContext, ManageImages);
 
         public static string ManageSliderNavClass(ViewContext viewContext) => PageNavClass(viewContext, ManageSlider);
+
+        public static string ManagePartnersNavClass(ViewContext viewContext) => PageNavClass(viewContext, ManagePartners);
     
         public static string PageNavClass(ViewContext viewContext, string page)
         {

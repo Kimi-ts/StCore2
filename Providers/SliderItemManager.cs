@@ -30,7 +30,7 @@ namespace Razor_VS_Code_test.Models
         public IList<SliderItem> GetFilteredSliderItems(bool isShowExpired, bool isShowActive)
         {
             return _context.SliderItems
-            .Where(c => (c.ExpireDate.Date > DateTime.Now) == isShowActive)
+            .Where(c => (c.ExpireDate.Date > DateTime.Now) == isShowExpired)
             .Where(t => t.IsActive == isShowActive)
             .OrderBy(c => c.OrderNumber).ToList();
         }

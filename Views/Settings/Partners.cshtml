@@ -1,0 +1,62 @@
+@model IList<Partner>
+
+@{
+    ViewData["Title"] = "Упраление партнёрами";
+    ViewData.AddActivePage(ManageNavPages.ManagePartners);
+}
+
+<p class="text-muted">@ViewData["Title"]</p>
+
+<div class="row">
+        @foreach(var item in Model)
+        {
+            <div class="col-12">
+                <p>@item.Name</p>
+            </div>
+        }
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="table-responsive">
+            <table class="table table-striped table-sm">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Название</th>
+                  <th>Телефон</th>
+                  <th>Веб-сайт</th>
+                  <th>Заметки</th>
+                  <th>Показывать на сайте</th>
+                  <th>Позиция</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+              @foreach(var item in Model)
+                {
+                <tr>
+                  <td>@(Model.IndexOf(item)+1)</td>
+                  <td>@item.Name</td>
+                  <td>@item.Phone</td>
+                  <td>@item.SiteUrl</td>
+                  <td>@item.Notes</td>
+                  <td>@item.IsActive</td>
+                  <td>@item.OrderNumber</td>
+                  <td>
+                    <a asp-area="" asp-controller="Settings" asp-action="EditPartner" asp-route-id="@item.PartnerId" title="Edit">Редактировать</a>
+                  </td>
+                </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+    </div>
+</div>
+
+<hr />
+
+@Html.Partial("_AddNewPartner", new Partner())
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

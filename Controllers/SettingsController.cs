@@ -103,6 +103,17 @@ namespace Razor_VS_Code_test.Controllers
             return View(model);
         }
 
+        public async Task<IActionResult> EditPartner(string id)
+        {
+            var item = await _partnerManager.GetPartnerByIdAsync(id);
+            if (item == null)
+            {
+                return RedirectToAction(nameof(Partners));
+            }
+
+            return View(item);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditSale(AddNewSaleViewModel model)
@@ -188,6 +199,20 @@ namespace Razor_VS_Code_test.Controllers
             await _sliderManager.UpdateSliderItemAsync(model);
 
             return RedirectToAction(nameof(Slider));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditPartner(Partner model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            await _partnerManager.UpdatePartnerAsync(model);
+
+            return RedirectToAction(nameof(Partners));
         }
 
         [HttpPost]

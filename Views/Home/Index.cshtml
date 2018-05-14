@@ -1,6 +1,13 @@
 ﻿@model IList<SliderItem>
+
+@inject IPartnerManager _partnersManager
+
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Главная страница";
+}
+
+@{
+	var partners = _partnersManager.GetFilteredSliderItems(true);
 }
 
 @await Html.PartialAsync("_Slider", @Model)
@@ -45,42 +52,4 @@
 		</div>
 	</div>
 </section>
-<section id="our-partners" class="bg-light mb-3">
-	<div class="container pt-5 pb-5">
-		<div class="row ">
-			<div class="col-12 col-md-6 mx-auto mb-5 text-center">
-				<h3 class="pb-3">Наши партнёры</h3>
-			</div>  
-		</div>
-		<div class="row mb-5 pt-3 justify-content-center">
-			<div class="col-3 col-md-3">
-				<a class="partner-link">ЗАО "Атлант"</a>
-			</div>
-			<div class="col-3 col-md-3">
-				<a class="partner-link">ИП Краскин Н.И.</a>
-			</div>
-			<div class="col-3 col-md-3">
-				<a class="partner-link">ООО Лако-краска</a>
-			</div>
-		</div>
-		<div class="row mb-5 pt-3 justify-content-center">
-			<div class="col-3 col-md-3">
-				<a class="partner-link">ООО Мой шинник</a>
-			</div>
-			<div class="col-3 col-md-3">
-				<a class="partner-link">СТО №6 Малиновка</a>
-			</div>
-		</div>
-		<div class="row mb-5 pt-3 justify-content-center">
-			<div class="col-3 col-md-3">
-				<a class="partner-link">ЗАО Покрасочный цех</a>
-			</div>
-			<div class="col-3 col-md-3">
-				<a class="partner-link">ООО СТО №4</a>
-			</div>
-			<div class="col-3 col-md-3">
-				<a class="partner-link">ИП Швец Т.С.</a>
-			</div>
-		</div>
-	</div>
-</section>
+@await Html.PartialAsync("_Partners", @partners)

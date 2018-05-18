@@ -25,10 +25,12 @@ namespace Razor_VS_Code_test.Controllers
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly ISliderItemManager _sliderManager;
         private readonly IPartnerManager _partnerManager;
+        private readonly ISiteConfigManager _siteConfigManager;
 
-        public SettingsController(IHostingEnvironment hostingEnvironment, UserManager<ApplicationUser> userManager, IDiscountManager discountManager, ISliderItemManager sliderManager, IPartnerManager partnerManager)
+        public SettingsController(IHostingEnvironment hostingEnvironment, ISiteConfigManager siteConfigManager, UserManager<ApplicationUser> userManager, IDiscountManager discountManager, ISliderItemManager sliderManager, IPartnerManager partnerManager)
         {
             _hostingEnvironment = hostingEnvironment;
+            _siteConfigManager = siteConfigManager;
             _userManager = userManager;
             _discountManager = discountManager;
             _sliderManager = sliderManager;
@@ -36,7 +38,8 @@ namespace Razor_VS_Code_test.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            var model = _siteConfigManager.GetSiteConfig();
+            return View(model);
         }
 
         public IActionResult Slider()
@@ -199,6 +202,21 @@ namespace Razor_VS_Code_test.Controllers
             await _sliderManager.UpdateSliderItemAsync(model);
 
             return RedirectToAction(nameof(Slider));
+        }
+
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditSiteConfig(SiteConfig model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            await _siteConfigManager.UpdateSiteConfig(model);
+
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpPost]

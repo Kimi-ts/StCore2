@@ -11,3 +11,12 @@ https://www.humankode.com/asp-net-core/develop-locally-with-https-self-signed-ce
 
 using ef many-to-many relationships:
 https://blog.oneunicorn.com/2017/09/25/many-to-many-relationships-in-ef-core-2-0-part-1-the-basics/
+
+//to do
+1) create entity for global config data - tel, address
+2) edit that info in Settins => main screen (that's probably be a plain json object)
+2) pass global info to meta tags on the page
+3) add animations on home page
+4) create paging on messages page (probably by js)
+5) add sitemap file`
+6) add 404 page

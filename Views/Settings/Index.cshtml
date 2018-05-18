@@ -1,5 +1,98 @@
+@model SiteConfig
 @{
     ViewData.AddActivePage(ManageNavPages.Index);
 }
 
-<p>Последние логи: </p>
+<h5 class="bp-3">Конфигурация сайта</h5>
+<div class="row">
+    <div class="col-md-6">
+        <form asp-controller="Settings" asp-action="EditSiteConfig" method="POST" class="mb-3">
+            <div class="form-group">
+                <label asp-for="@Model.Name"></label>
+                <textarea rows="4" class="form-control" asp-for="@Model.Name"></textarea>
+                <span asp-validation-for="@Model.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.PartnerPhones"></label>
+                <textarea rows="4" class="form-control" asp-for="@Model.PartnerPhones"></textarea>
+                <span asp-validation-for="@Model.PartnerPhones" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.ClientPhones"></label>
+                <textarea rows="4" class="form-control" asp-for="@Model.ClientPhones"></textarea>
+                <span asp-validation-for="@Model.ClientPhones" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.PartnerEmails"></label>
+                <textarea rows="4" class="form-control" asp-for="@Model.PartnerEmails"></textarea>
+                <span asp-validation-for="@Model.PartnerEmails" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.ClientEmails"></label>
+                <textarea rows="4" class="form-control" asp-for="@Model.ClientEmails"></textarea>
+                <span asp-validation-for="@Model.ClientEmails" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Country"></label>
+                <textarea rows="4" class="form-control" asp-for="@Model.Country"></textarea>
+                <span asp-validation-for="@Model.Country" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.PostCode"></label>
+                <textarea rows="4" class="form-control" asp-for="@Model.PostCode"></textarea>
+                <span asp-validation-for="@Model.PostCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Street"></label>
+                <textarea rows="4" class="form-control" asp-for="@Model.Street"></textarea>
+                <span asp-validation-for="@Model.Street" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.City"></label>
+                <textarea rows="4" class="form-control" asp-for="@Model.City"></textarea>
+                <span asp-validation-for="@Model.City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.OpenHours"></label>
+                <textarea rows="4" class="form-control" asp-for="@Model.OpenHours"></textarea>
+                <span asp-validation-for="@Model.OpenHours" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.CloseHours"></label>
+                <textarea rows="4" class="form-control" asp-for="@Model.CloseHours"></textarea>
+                <span asp-validation-for="@Model.CloseHours" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.WorkingDaysString"></label>
+                <textarea rows="4" class="form-control" asp-for="@Model.WorkingDaysString"></textarea>
+                <span asp-validation-for="@Model.WorkingDaysString" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.WorkingDays"></label>
+                <textarea rows="4" class="form-control" asp-for="@Model.WorkingDays"></textarea>
+                <span asp-validation-for="@Model.WorkingDays" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.OfficialLicence"></label>
+                <textarea rows="4" class="form-control" asp-for="@Model.OfficialLicence"></textarea>
+                <span asp-validation-for="@Model.OfficialLicence" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.OfficialInfo"></label>
+                <textarea rows="4" class="form-control" asp-for="@Model.OfficialInfo"></textarea>
+                <span asp-validation-for="@Model.OfficialInfo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Copyright"></label>
+                <textarea rows="4" class="form-control" asp-for="@Model.Copyright"></textarea>
+                <span asp-validation-for="@Model.Copyright" class="text-danger"></span>
+            </div>
+            <input type="hidden" name="SiteConfigId" value="@Model.SiteConfigId" />
+            <input type="reset" name="Reset" value="Отмена"/>
+            <input type="submit" value="Отправить" class="btn btn-default" />
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

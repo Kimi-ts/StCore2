@@ -11,10 +11,12 @@ namespace Razor_VS_Code_test.Controllers
     public class HomeController : Controller
     {
         private readonly ISliderItemManager _sliderManager;
+        private readonly ISiteConfigManager _siteConfigManager;
 
-        public HomeController(ISliderItemManager sliderManamger)
+        public HomeController(ISliderItemManager sliderManamger, ISiteConfigManager siteConfigManager)
         {
             _sliderManager = sliderManamger;
+            _siteConfigManager = siteConfigManager;
         }
         public IActionResult Index()
         {
@@ -24,7 +26,8 @@ namespace Razor_VS_Code_test.Controllers
 
         public IActionResult About()
         {
-            return View();
+            SiteConfig config = _siteConfigManager.GetSiteConfig();
+            return View(config);
         }
 
         public IActionResult Discount()

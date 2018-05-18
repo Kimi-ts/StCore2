@@ -1,25 +1,25 @@
-﻿@{
+﻿@model SiteConfig
+@{
     ViewData["Title"] = "Контакты";
 }
 
 <h2 class="mt-3">@ViewData["Title"]</h2>
 <hr />
 <address>
-    ООО МДМ-Гроуп<br />
-    г. Минск ул. Корженевского, 16 к. 1<br />
+    @Model.Name<br />
+    @Model.City @Model.Street<br />
     <abbr title="Phone">Тел:</abbr>
-    8017 353 34 35 <br />
-	8044 353 34 35 (viber)
+    @Model.ClientPhones
 </address>
 
 <address>
 	<strong>Время работы:</strong><br />
-	<p>Пн-Пт 09:00 - 19:00</p>
+	<p>@Model.WorkingDaysString @Model.OpenHours - @Model.CloseHours</p>
 </address>
 
 <address>
     <strong>По вопросам партнёрства:</strong> <br />
-	<a href="mailto:Support@example.com">Support@example.com</a><br />
+	<a href="mailto:@Model.PartnerEmails">@Model.PartnerEmails</a><br />
     <strong>По вопросам работы сайта:</strong> <br />
-	<a href="mailto:Marketing@example.com">Marketing@example.com</a>
+	<a href="mailto:@Model.ClientEmails">@Model.ClientEmails</a>
 </address>

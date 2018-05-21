@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@inject ISiteConfigManager siteConfigManager
+@{
+  var siteConfigItem = siteConfigManager.GetSiteConfig();
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -46,11 +50,11 @@
         <footer id="footer" class="footer bg-dark">
             <div class="container">
                 <div class="row fill-40-viewport py-5 text-white-70 align-items-top">
-                    <div class="col-12 col-md-6">
+                    <div class="col-12 col-md-4">
                         <ul class="list-unstyled">
-                            <li><h6 class="text-white">MDM-Group</h6></li>
-                            <li>УНН 3353 3534534</li>
-                            <li>ИП Бобок М.Д. лицензия от 01.05.2018</li>
+                            <li><h6 class="text-white">@siteConfigItem.Name</h6></li>
+                            <li>@siteConfigItem.OfficialLicence</li>
+                            <li>@siteConfigItem.OfficialInfo</li>
                         </ul>
                     </div>
                     <div class="col-12 col-md-2">
@@ -58,19 +62,18 @@
                             <li class="text-white"><i class="fa fa-vk" aria-hidden="true"></i> <i class="fa fa-twitter" aria-hidden="true"></i> <i class="fa fa-facebook" aria-hidden="true"></i></li>
                         </ul>
                     </div>
-                    <div class="col-12 col-md-2">
+                    <div class="col-12 col-md-3">
                         <ul class="list-unstyled">
                             <li><h6 class="text-white">Клиентам</h6></li>
-                            <li>+375 44 7347834</li>
-                            <li>+375 29 7998353</li>
-                            <li>ежедневно с 09 до 18</li>
+                            <li>@siteConfigItem.ClientPhones</li>
+                            <li>@siteConfigItem.WorkingDaysString с @siteConfigItem.OpenHours до @siteConfigItem.CloseHours</li>
                         </ul>
                     </div>
-                    <div class="col-12 col-md-2">
+                    <div class="col-12 col-md-3">
                         <ul class="list-unstyled">
                             <li><h6 class="text-white">Партнёрам</h6></li>
-                            <li>+375 44 7293437</li>
-                            <li>info@mdm-group.by</li>
+                            <li>@siteConfigItem.PartnerPhones</li>
+                            <li>@siteConfigItem.PartnerEmails</li>
                         </ul>
                     </div>
                 </div>

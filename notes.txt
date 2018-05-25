@@ -20,3 +20,6 @@ https://blog.oneunicorn.com/2017/09/25/many-to-many-relationships-in-ef-core-2-0
 4) create paging on messages page (probably by js)
 5) add sitemap file`
 6) add 404 page
+7) split emails and telephones by , - so can add more than one
+8) create db entities for social networks
+9) create db entities for meta entities

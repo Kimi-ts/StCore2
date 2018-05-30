@@ -18,10 +18,10 @@ namespace Razor_VS_Code_test.Models
         [Display(Name = "Контактные телефоны для партнёров")]
         public string PartnerPhones { get; set; }
         [Required(ErrorMessage = "Обязательное поле")]
-        [Display(Name = "Контактные телефоны для клиентов")]
+        [Display(Name = "Контактные телефоны для клиентов (через запятую)")]
         public string ClientPhones { get; set; }
         [Required(ErrorMessage = "Обязательное поле")]
-        [Display(Name = "Контактные emails для партнёров")]
+        [Display(Name = "Контактные emails для партнёров (через запятую)")]
         public string PartnerEmails { get; set; }
         [Required(ErrorMessage = "Обязательное поле")]
         [Display(Name = "Контактные emails для клиентов")]

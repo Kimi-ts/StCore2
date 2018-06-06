@@ -143,6 +143,7 @@ namespace Razor_VS_Code_test.Controllers
         {
             if (!ModelState.IsValid)
             {
+                model.AllTags = _discountManager.GetAllTags();
                 return View(model);
             }
 

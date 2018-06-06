@@ -11,5 +11,10 @@ namespace Razor_VS_Code_test.Models
     {
         SiteConfig GetSiteConfig();
         Task UpdateSiteConfig (SiteConfig config);
+        Task AddSocialNetworkAsync(SocialNetworkItem item);
+        Task UpdateSocialNetworkAsync(SocialNetworkItem item);
+        Task RemoveSocialNetworkAsync (SocialNetworkItem item);
+        IList<SocialNetworkItem> GetSocialNetworkByType(string type);
+        Task<SocialNetworkItem> GetSocialNetworkByIdAsync(string id);
     }
 }

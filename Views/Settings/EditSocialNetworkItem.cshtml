@@ -1,0 +1,32 @@
+@model SocialNetworkItem
+
+<h5 class="bp-3">Редактировать</h5>
+<div class="row">
+    <div class="col-md-6">
+        <form asp-controller="Settings" asp-action="EditSocialNetworkItem" method="POST" class="mb-3">
+            <div class="form-group">
+                <label asp-for="@Model.Name"></label>
+                <input class="form-control" asp-for="@Model.Name"/>
+                <span asp-validation-for="@Model.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Type"></label>
+                <input class="form-control" asp-for="@Model.Type"/>
+                <span asp-validation-for="@Model.Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Url"></label>
+                <input class="form-control" asp-for="@Model.Url"/>
+                <span asp-validation-for="@Model.Url" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.IconClass"></label>
+                <input class="form-control" asp-for="@Model.IconClass"/>
+                <span asp-validation-for="@Model.IconClass" class="text-danger"></span>
+            </div>
+            <input type="hidden" name="SocialNetworkItemId" value="@Model.SocialNetworkItemId" />
+            <input type="submit" value="Отправить" class="btn btn-default" />
+        </form>
+        <a  asp-area="" asp-controller="Settings" asp-action="SocialNetworks" title="Back to social networks list">К списку соцсетей</a>
+    </div>
+</div>

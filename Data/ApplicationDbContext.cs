@@ -37,5 +37,6 @@ namespace Razor_VS_Code_test.Data
         public DbSet<SliderItem> SliderItems { get; set; }
         public DbSet<Partner> Partners { get; set; }
         public DbSet<SiteConfig> SiteConfig { get; set; }
+        public DbSet<SocialNetworkItem> SocialNetworkItems { get; set; }
     }
 }

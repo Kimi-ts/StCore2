@@ -17,14 +17,42 @@ namespace Razor_VS_Code_test.Models
             _context = context;
         }
 
+        public async Task AddSocialNetworkAsync(SocialNetworkItem item)
+        {
+            await _context.SocialNetworkItems.AddAsync(item);
+            _context.SaveChanges();
+        }
+
+        public async Task RemoveSocialNetworkAsync(SocialNetworkItem item)
+        {
+            _context.SocialNetworkItems.Remove(item);
+            await _context.SaveChangesAsync();
+        }
+
         public SiteConfig GetSiteConfig()
         {
-            return  _context.SiteConfig.FirstOrDefault();
+            return _context.SiteConfig.FirstOrDefault();
+        }
+
+        public async Task<SocialNetworkItem> GetSocialNetworkByIdAsync(string id)
+        {
+            return await _context.SocialNetworkItems.Where( c => c.SocialNetworkItemId == id).FirstAsync();
+        }
+
+        public  IList<SocialNetworkItem> GetSocialNetworkByType(string type)
+        {
+            return _context.SocialNetworkItems.Where( c => c.Type == type).ToList();
         }
 
         public async Task UpdateSiteConfig(SiteConfig configItem)
         {
             _context.SiteConfig.Update(configItem);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateSocialNetworkAsync(SocialNetworkItem item)
+        {
+            _context.SocialNetworkItems.Update(item);
             await _context.SaveChangesAsync();
         }
     }

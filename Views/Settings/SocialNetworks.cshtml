@@ -1,0 +1,52 @@
+@model List<SocialNetworkItem>
+
+@{
+    ViewData["Title"] = "Упраление социальными сетями";
+    ViewData.AddActivePage(ManageNavPages.ManageSocialNetworks);
+}
+
+<p class="text-muted">@ViewData["Title"]</p>
+
+<div class="row">
+    <div class="col-12">
+        <div class="table-responsive">
+            <table class="table table-striped table-sm">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Название</th>
+                  <th>URL</th>
+                  <th colspan="2">Иконка</th>
+                  <th>Тип</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+              @foreach(var item in Model)
+                {
+                <tr>
+                  <td>@(Model.IndexOf(item)+1)</td>
+                  <td>@item.Name</td>
+                  <td>@item.Url</td>
+                  <td>@item.Url</td>
+                  <td>@item.IconClass</td>
+                  <td>computed</td>
+                  <td>@item.Type</td>
+                  <td>
+                    <a asp-area="" asp-controller="Settings" asp-action="EditSocialNetworkItem" asp-route-id="@item.SocialNetworkItemId" title="Edit">Редактировать</a>
+                  </td>
+                </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+    </div>
+</div>
+
+<hr />
+
+@Html.Partial("_AddNewSocialNetworkItem", new SocialNetworkItem())
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

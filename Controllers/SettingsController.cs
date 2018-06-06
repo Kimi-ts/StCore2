@@ -75,6 +75,15 @@ namespace Razor_VS_Code_test.Controllers
             var partners = _partnerManager.GetAllPartners();
             return View(partners);
         }
+        public IActionResult SocialNetworks()
+        {
+            var share = _siteConfigManager.GetSocialNetworkByType("share");
+            var follow = _siteConfigManager.GetSocialNetworkByType("follow");
+            var all = new List<SocialNetworkItem>(share.Count + follow.Count);
+            all.AddRange(share);
+            all.AddRange(follow);
+            return View(all);
+        }
 
         public async Task<IActionResult> EditSale(string id)
         {
@@ -112,6 +121,17 @@ namespace Razor_VS_Code_test.Controllers
             if (item == null)
             {
                 return RedirectToAction(nameof(Partners));
+            }
+
+            return View(item);
+        }
+
+        public async Task<IActionResult> EditSocialNetworkItem(string id)
+        {
+            var item = await _siteConfigManager.GetSocialNetworkByIdAsync(id);
+            if (item == null)
+            {
+                return RedirectToAction(nameof(SocialNetworks));
             }
 
             return View(item);
@@ -204,7 +224,7 @@ namespace Razor_VS_Code_test.Controllers
             return RedirectToAction(nameof(Slider));
         }
 
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditSiteConfig(SiteConfig model)
@@ -231,6 +251,20 @@ namespace Razor_VS_Code_test.Controllers
             await _partnerManager.UpdatePartnerAsync(model);
 
             return RedirectToAction(nameof(Partners));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditSocialNetworkItem(SocialNetworkItem model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            await _siteConfigManager.UpdateSocialNetworkAsync(model);
+
+            return RedirectToAction(nameof(SocialNetworks));
         }
 
         [HttpPost]
@@ -377,6 +411,26 @@ namespace Razor_VS_Code_test.Controllers
             await _partnerManager.AddPartnerAsync(model);
 
             return RedirectToAction(nameof(Partners));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> PostSocialNetworkItem(SocialNetworkItem model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            }
+
+            await _siteConfigManager.AddSocialNetworkAsync(model);
+
+            return RedirectToAction(nameof(SocialNetworks));
         }
 
         [HttpPost]

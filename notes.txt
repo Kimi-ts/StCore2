@@ -23,3 +23,4 @@ https://blog.oneunicorn.com/2017/09/25/many-to-many-relationships-in-ef-core-2-0
 7) split emails and telephones by , - so can add more than one
 8) create db entities for social networks
 9) create db entities for meta entities
+10) add error page

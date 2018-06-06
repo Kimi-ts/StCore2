@@ -26,8 +26,9 @@ namespace Razor_VS_Code_test.Controllers
 
         public IActionResult About()
         {
-            SiteConfig config = _siteConfigManager.GetSiteConfig();
-            return View(config);
+            //SiteConfig config = _siteConfigManager.GetSiteConfig();
+            //return View(config);
+            return View();
         }
 
         public IActionResult Discount()

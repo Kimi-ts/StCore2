@@ -1,6 +1,8 @@
 ﻿@inject ISiteConfigManager siteConfigManager
 @{
   var siteConfigItem = siteConfigManager.GetSiteConfig();
+
+  var socialNetworks = siteConfigManager.GetSocialNetworkByType("share");
 }
 <!DOCTYPE html>
 <html>
@@ -59,7 +61,15 @@
                     </div>
                     <div class="col-12 col-md-2">
                         <ul class="list-unstyled">
-                            <li class="text-white"><i class="fa fa-vk" aria-hidden="true"></i> <i class="fa fa-twitter" aria-hidden="true"></i> <i class="fa fa-facebook" aria-hidden="true"></i></li>
+                            <li class="text-white">
+                                @{foreach (var item in socialNetworks)
+                                {
+                                    <a class="text-white no-hover-underline" href="@item.Url" rel="noopener" target="_blank" >
+                                        <i class="@item.IconClass" aria-hidden="true"></i>
+                                    </a>
+                                }
+                                }
+                            </li>
                         </ul>
                     </div>
                     <div class="col-12 col-md-3">

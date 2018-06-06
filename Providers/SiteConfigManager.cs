@@ -55,5 +55,21 @@ namespace Razor_VS_Code_test.Models
             _context.SocialNetworkItems.Update(item);
             await _context.SaveChangesAsync();
         }
+
+        public async Task UpdatePageDataAsync(PageData item)
+        {
+            _context.PageDataItems.Update(item);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<PageData> GetPageDataByNameAsync(string name)
+        {
+            return await _context.PageDataItems.Where(c => c.PageName == name).FirstOrDefaultAsync();
+        }
+
+        public IList<PageData> GetAllPageDataItems()
+        {
+            return _context.PageDataItems.ToList();
+        }
     }
 }

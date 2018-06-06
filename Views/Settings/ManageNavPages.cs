@@ -25,6 +25,8 @@ namespace Razor_VS_Code_test.Views.Settings
         
         public static string ManageSocialNetworks => "ManageSocialNetworks";
 
+        public static string ManagePagesInfo => "ManagePagesInfo";
+
 
         public static string IndexNavClass(ViewContext viewContext) => PageNavClass(viewContext, Index);
 
@@ -39,6 +41,8 @@ namespace Razor_VS_Code_test.Views.Settings
         public static string ManagePartnersNavClass(ViewContext viewContext) => PageNavClass(viewContext, ManagePartners);
 
         public static string ManageSocialNetworksNavClass(ViewContext viewContext) => PageNavClass(viewContext, ManageSocialNetworks);
+
+        public static string ManagePagesInfoNavClass(ViewContext viewContext) => PageNavClass(viewContext, ManagePagesInfo);
     
         public static string PageNavClass(ViewContext viewContext, string page)
         {

@@ -85,6 +85,12 @@ namespace Razor_VS_Code_test.Controllers
             return View(all);
         }
 
+        public IActionResult PagesData()
+        {
+            var data = _siteConfigManager.GetAllPageDataItems();
+            return View(data);
+        }
+
         public async Task<IActionResult> EditSale(string id)
         {
             var sale = await _discountManager.GetSaleByIdWithTags(id);
@@ -132,6 +138,17 @@ namespace Razor_VS_Code_test.Controllers
             if (item == null)
             {
                 return RedirectToAction(nameof(SocialNetworks));
+            }
+
+            return View(item);
+        }
+
+        public async Task<IActionResult> EditPageData (string PageName)
+        {
+            var item = await _siteConfigManager.GetPageDataByNameAsync(PageName);
+            if (item == null)
+            {
+                return RedirectToAction(nameof(PagesData));
             }
 
             return View(item);
@@ -266,6 +283,20 @@ namespace Razor_VS_Code_test.Controllers
             await _siteConfigManager.UpdateSocialNetworkAsync(model);
 
             return RedirectToAction(nameof(SocialNetworks));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditPageData(PageData model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            await _siteConfigManager.UpdatePageDataAsync(model);
+
+            return RedirectToAction(nameof(PagesData));
         }
 
         [HttpPost]

@@ -1,0 +1,33 @@
+@model PageData
+
+<h5 class="bp-3">Редактировать данные страницы</h5>
+<div class="row">
+    <div class="col-md-6">
+        <form asp-controller="Settings" asp-action="EditPageData" method="POST" class="mb-3">
+            <div class="form-group">
+                <label asp-for="@Model.PageName"></label>
+                <input class="form-control" asp-for="@Model.PageName" />
+                <span asp-validation-for="@Model.PageName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Title"></label>
+                <input class="form-control" asp-for="@Model.Title" />
+                <span asp-validation-for="@Model.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.MetaDescription"></label>
+                <input class="form-control" asp-for="@Model.MetaDescription" />
+                <span asp-validation-for="@Model.MetaDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.MetaKeywords"></label>
+                <input class="form-control" asp-for="@Model.MetaKeywords" />
+                <span asp-validation-for="@Model.MetaKeywords" class="text-danger"></span>
+            </div>
+
+            <input type="hidden" name="PageDataId" value="@Model.PageDataId" />
+            <input type="submit" value="Отправить" class="btn btn-default" />
+        </form>
+        <a  asp-area="" asp-controller="Settings" asp-action="PagesData" title="Back to pages">К списку страниц</a>
+    </div>
+</div>

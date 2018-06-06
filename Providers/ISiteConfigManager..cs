@@ -16,5 +16,8 @@ namespace Razor_VS_Code_test.Models
         Task RemoveSocialNetworkAsync (SocialNetworkItem item);
         IList<SocialNetworkItem> GetSocialNetworkByType(string type);
         Task<SocialNetworkItem> GetSocialNetworkByIdAsync(string id);
+        Task UpdatePageDataAsync(PageData item);
+        Task<PageData> GetPageDataByNameAsync(string id);
+        IList<PageData> GetAllPageDataItems();
     }
 }

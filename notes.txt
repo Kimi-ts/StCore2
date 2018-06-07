@@ -24,3 +24,5 @@ https://blog.oneunicorn.com/2017/09/25/many-to-many-relationships-in-ef-core-2-0
 8) create db entities for social networks
 9) create db entities for meta entities
 10) add error page
+11) fix titles for all pages
+12) make Page readonly in Settings->Page data

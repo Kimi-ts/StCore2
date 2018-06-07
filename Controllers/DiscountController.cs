@@ -10,17 +10,24 @@ using static Razor_VS_Code_test.Models.DiscountsViewModels.DiscountsListViewMode
 
 namespace Razor_VS_Code_test.Controllers
 {
-    public class DiscountController : Controller
+    public class DiscountController : BaseController
     {
         private readonly IDiscountManager _discountManager;
+        private readonly ISiteConfigManager _siteConfigManager;
 
-        public DiscountController(IDiscountManager discountManager)
+        public DiscountController(ISiteConfigManager siteConfigManager, IDiscountManager discountManager)
         {
             _discountManager = discountManager;
+            _siteConfigManager = siteConfigManager;
         }
-
-        public IActionResult Index(int count, bool isDisplayNew, string filteredTags)
+        public async Task<IActionResult> Index(int count, bool isDisplayNew, string filteredTags)
         {
+            var pageData = await _siteConfigManager.GetPageDataByNameAsync("Actions");
+            ViewData["Title"] = pageData.Title;
+
+            ViewData["MetaDescription"] = BuildMetaTag("description", pageData.MetaDescription);
+            ViewData["MetaTitle"] = BuildMetaTag("title", pageData.Title);
+
             List<string> tagsList = new List<string>();
             if (filteredTags != "all")
             {

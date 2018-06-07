@@ -8,7 +8,7 @@ using Razor_VS_Code_test.Models;
 
 namespace Razor_VS_Code_test.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly ISliderItemManager _sliderManager;
         private readonly ISiteConfigManager _siteConfigManager;
@@ -18,22 +18,25 @@ namespace Razor_VS_Code_test.Controllers
             _sliderManager = sliderManamger;
             _siteConfigManager = siteConfigManager;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            var pageData = await _siteConfigManager.GetPageDataByNameAsync("Home");
+            ViewData["Title"] = pageData.Title;
+
+            ViewData["MetaDescription"] = BuildMetaTag("description", pageData.MetaDescription);
+            ViewData["MetaTitle"] = BuildMetaTag("title", pageData.Title);
+
             var slides = _sliderManager.GetFilteredSliderItems(false, true);
             return View(slides);
         }
 
-        public IActionResult About()
+        public async Task<IActionResult> About()
         {
-            //SiteConfig config = _siteConfigManager.GetSiteConfig();
-            //return View(config);
-            return View();
-        }
+            var pageData = await _siteConfigManager.GetPageDataByNameAsync("About");
+            ViewData["Title"] = pageData.Title;
 
-        public IActionResult Discount()
-        {
-            ViewData["Message"] = "Акции и скидки от наших партнёров";
+            ViewData["MetaDescription"] = BuildMetaTag("description", pageData.MetaDescription);
+            ViewData["MetaTitle"] = BuildMetaTag("title", pageData.Title);
 
             return View();
         }

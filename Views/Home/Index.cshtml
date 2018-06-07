@@ -3,10 +3,6 @@
 @inject IPartnerManager _partnersManager
 
 @{
-    ViewData["Title"] = "Главная страница";
-}
-
-@{
 	var partners = _partnersManager.GetFilteredSliderItems(true);
 }
 

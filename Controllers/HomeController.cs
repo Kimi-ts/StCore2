@@ -41,6 +41,11 @@ namespace Razor_VS_Code_test.Controllers
             return View();
         }
 
+        public IActionResult Page404()
+        {
+            return View();
+        }
+
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

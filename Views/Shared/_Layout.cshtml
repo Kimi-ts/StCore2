@@ -22,6 +22,7 @@
         <link rel="stylesheet" href="~/lib/tether/dist/css/tether.css" />
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="~/css/points.css" />
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
     <environment exclude="Development">
@@ -57,13 +58,24 @@
         @RenderBody()
     </div>
         <footer id="footer" class="footer bg-dark">
-            <div class="container">
+                    <div class="points">
+			<div class="point point-floating-1"></div>
+			<div class="point point-floating-2"></div>
+			<div class="point point-floating-3"></div>
+			<div class="point point-floating-4"></div>
+			<div class="point point-floating-5"></div>
+			<div class="point point-floating-6"></div>
+			<div class="point point-floating-7"></div>
+			<div class="point point-floating-8"></div>
+			<div class="point point-floating-9"></div>
+		</div>
+            <div class="container overflow-points-container">
                 <div class="row fill-40-viewport py-5 text-white-70 align-items-top">
                     <div class="col-12 col-md-4">
                         <ul class="list-unstyled">
                             <li><h6 class="text-white">@siteConfigItem.Name</h6></li>
-                            <li>@siteConfigItem.OfficialLicence</li>
-                            <li>@siteConfigItem.OfficialInfo</li>
+                            <li><p class="mb-0">@siteConfigItem.OfficialLicence</p></li>
+                            <li><p class="mb-0">@siteConfigItem.OfficialInfo</p></li>
                         </ul>
                     </div>
                     <div class="col-12 col-md-2">
@@ -87,9 +99,9 @@
                             }
                             @foreach(var phone in phones)
                             {
-                                <li>@phone</li>
+                                <li><p class="mb-0">@phone</p></li>
                             }
-                            <li>@siteConfigItem.WorkingDaysString с @siteConfigItem.OpenHours до @siteConfigItem.CloseHours</li>
+                            <li><p class="mb-0">@siteConfigItem.WorkingDaysString с @siteConfigItem.OpenHours до @siteConfigItem.CloseHours</p></li>
                         </ul>
                     </div>
                     <div class="col-12 col-md-3">
@@ -100,9 +112,9 @@
                             }
                             @foreach(var phone in partnerPhones)
                             {
-                                <li>@phone</li>
+                                <li><p class="mb-0">@phone</p></li>
                             }
-                            <li>@siteConfigItem.PartnerEmails</li>
+                            <li><p class="mb-0">@siteConfigItem.PartnerEmails</p></li>
                         </ul>
                     </div>
                 </div>

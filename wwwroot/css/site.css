@@ -23,6 +23,12 @@ body {
     width: 100%;
 }
 
+@media screen and (max-width: 767px) {
+    .footer{
+        bottom: auto;
+    }
+}
+
 /* Carousel */
 .carousel-caption p {
     font-size: 20px;

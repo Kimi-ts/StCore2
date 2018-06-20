@@ -1,16 +1,23 @@
 @using Razor_VS_Code_test.Utils;
 
+@inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
 @model MessagesListVievModel
 @{
-    ViewData["Title"] = "Ваша последняя переписка с " + Model.ChatOwner.UserName;
+    var user = await UserManager.GetUserAsync(User);
+    if (await UserManager.IsInRoleAsync(user, "Administrator")){
+        ViewData["Title"] = "Ваша последняя переписка с " + Model.ChatOwner.UserName;
+    }
+    else{
+        ViewData["Title"] = "Ваша последняя переписка";
+    }
 }
 <p class="text-muted">@ViewData["Title"]</p>
 <hr />
 
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-12 col-md-6">
         <ul class="list-group">
             @foreach (var message in Model.Messages)
             {
@@ -45,7 +52,7 @@
             }
         </ul>
     </div>
-    <div class="col-md-6">
+    <div class="col-12 col-md-6">
         @{if (await UserManager.IsInRoleAsync(@Model.CurrentUser, "Client"))
         {
         <div class="jumbotron">

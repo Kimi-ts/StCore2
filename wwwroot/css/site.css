@@ -6,6 +6,13 @@
 body {
     /* footer height */
     margin-bottom: 206px;
+    background: url("http://www.pizza.by/skin/frontend/default/pizzabyrebrand/images/bg.jpg");
+}
+
+@media screen and (max-width: 767px) {
+    body{
+        margin-bottom: 398px;
+    }
 }
 
 /* Wrapping element */
@@ -21,12 +28,6 @@ body {
     position: absolute;
     bottom: 0;
     width: 100%;
-}
-
-@media screen and (max-width: 767px) {
-    .footer{
-        bottom: auto;
-    }
 }
 
 /* Carousel */

@@ -2,10 +2,10 @@
  
 <p class="text-muted">Подробности акций вы можете уточнить по телефону</p>
 <div class="row">
-  <div class="col-9">
+  <div class="col-12 col-md-9">
     @Html.Partial("_ActionsList", @Model.Sales)
   </div>
-  <div class="col-3">
+  <div class="col-12 col-md-3">
     <form asp-action="Index" asp-controller="Discount" method="GET">
       <fieldset class="form-group">
         <h5>Фильтры</h5>
